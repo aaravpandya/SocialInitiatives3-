@@ -11,7 +11,7 @@ using System;
 namespace SocialInitiatives3.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20181026121812_initial")]
+    [Migration("20181112125634_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -282,6 +282,42 @@ namespace SocialInitiatives3.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("initiatives");
+                });
+
+            modelBuilder.Entity("SocialInitiatives3.Models.NGO", b =>
+                {
+                    b.Property<int>("NGOId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("NgoAddress")
+                        .IsRequired();
+
+                    b.Property<string>("NgoName")
+                        .IsRequired();
+
+                    b.Property<int>("categoryId");
+
+                    b.Property<string>("facebookLink");
+
+                    b.Property<string>("filepath")
+                        .IsRequired();
+
+                    b.Property<string>("instagramLink");
+
+                    b.Property<string>("phoneNumber");
+
+                    b.Property<string>("team");
+
+                    b.Property<string>("websiteLink");
+
+                    b.Property<string>("work")
+                        .IsRequired();
+
+                    b.HasKey("NGOId");
+
+                    b.ToTable("nGOs");
                 });
 
             modelBuilder.Entity("SocialInitiatives3.Models.SYOI", b =>

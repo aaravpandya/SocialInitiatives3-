@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using SocialInitiatives3.Models;
 using Microsoft.EntityFrameworkCore;
 using SocialInitiatives3.Models.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace SocialInitiatives3.Controllers
 {
@@ -14,10 +17,12 @@ namespace SocialInitiatives3.Controllers
     public class AdminController : Controller
     {
         private AppDbContext _dbContext;
+        private IHostingEnvironment he;
 
-        public AdminController(AppDbContext dbContext )
+        public AdminController(AppDbContext dbContext, IHostingEnvironment hostingEnvironment)
         {
             _dbContext = dbContext;
+            he = hostingEnvironment;
         }
 
         [Route("[controller]")]
@@ -117,5 +122,59 @@ namespace SocialInitiatives3.Controllers
             ViewBag.clubUsers = clubUsers;
             return View();
         }
+
+        [Route("[controller]/[action]")]
+        public IActionResult AddNGO(NgoViewModel viewModel)
+        {
+            NGO ngo = new NGO
+            {
+                NgoName = viewModel.NgoName,
+                NgoAddress = viewModel.NgoAddress
+            };
+            ngo.NGOId = 0;
+            ngo.work = viewModel.work;
+            ngo.team = viewModel.team;
+            ngo.facebookLink = viewModel.facebookLink;
+            ngo.instagramLink = viewModel.instagramLink;
+            ngo.phoneNumber = viewModel.phoneNumber;
+            ngo.websiteLink = viewModel.websiteLink;
+            IFormFile uploadedImage = viewModel.imageUpload;
+
+            if ((uploadedImage != null) || uploadedImage.ContentType.ToLower().StartsWith("Image/"))
+            {
+                //    var root = he.WebRootPath;
+                //    root = root + "\\SubmittedInitiativeImg";
+                ////same file name problems
+                //var filename = Path.Combine(he.WebRootPath, Path.GetFileName(uploadedImage.FileName));
+                var name = Guid.NewGuid().ToString() + Path.GetFileName(uploadedImage.FileName);
+                var filename = Path.Combine(he.WebRootPath, name);
+                
+                uploadedImage.CopyTo(new FileStream(filename, FileMode.Create));
+                ngo.filepath = "/" + name;
+            }
+            ngo.categoryId = viewModel.categoryId;
+            ngo.Category = viewModel.Category;
+            _dbContext.Add(ngo);
+            _dbContext.SaveChanges();
+            return Redirect(viewModel?.returnUrl ?? "/Admin/NGOS");
+        }
+
+        [Route("[controller]/[action]")]
+        public IActionResult NGOS ()
+        {
+            var n = _dbContext.nGOs.ToList();
+            ViewBag.ngos = n;
+            return View();
+        }
+
+        [Route("[controller]/[action]/{id?}")]
+        public IActionResult NgoButton(int id)
+        {
+            var n = _dbContext.nGOs.Find(id);
+            _dbContext.Remove(n);
+            _dbContext.SaveChanges();
+            return Redirect("/Admin/NGOS");
+        }
+            
     }
 }

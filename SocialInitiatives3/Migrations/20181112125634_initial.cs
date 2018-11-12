@@ -70,6 +70,29 @@ namespace SocialInitiatives3.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "nGOs",
+                columns: table => new
+                {
+                    NGOId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Category = table.Column<string>(nullable: true),
+                    NgoAddress = table.Column<string>(nullable: false),
+                    NgoName = table.Column<string>(nullable: false),
+                    categoryId = table.Column<int>(nullable: false),
+                    facebookLink = table.Column<string>(nullable: true),
+                    filepath = table.Column<string>(nullable: false),
+                    instagramLink = table.Column<string>(nullable: true),
+                    phoneNumber = table.Column<string>(nullable: true),
+                    team = table.Column<string>(nullable: true),
+                    websiteLink = table.Column<string>(nullable: true),
+                    work = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_nGOs", x => x.NGOId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -366,6 +389,9 @@ namespace SocialInitiatives3.Migrations
 
             migrationBuilder.DropTable(
                 name: "events");
+
+            migrationBuilder.DropTable(
+                name: "nGOs");
 
             migrationBuilder.DropTable(
                 name: "ownInitiatives");

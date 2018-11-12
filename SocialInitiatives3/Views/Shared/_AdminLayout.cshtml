@@ -53,6 +53,12 @@
                         {<span class="sr-only">(current)</span>}
                     </a>
                 </li>
+                <li class="nav-item  @(ViewBag.SelectedNav == "NGOS" ? "active" : "")">
+                    <a class="nav-link" href="@Url.Action("NGOS","Admin")">
+                        NGOS @if (ViewBag.SelectedNav == "NGOS")
+                        {<span class="sr-only">(current)</span>}
+                    </a>
+                </li>
                 <li class="nav-item  mr-auto">
                     <a class="nav-link" href="@Url.Action("Home","Index")">
                         Go to Website

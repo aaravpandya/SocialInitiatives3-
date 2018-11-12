@@ -35,5 +35,6 @@ namespace SocialInitiatives3.Models
         public DbSet<SYOI> ownInitiatives { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<ClubUser> clubUsers { get; set; }
+        public DbSet<NGO> nGOs { get; set; }
     }
 }

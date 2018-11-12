@@ -1,0 +1,129 @@
+﻿@model NgoViewModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<li class="nav-item" style="padding-right: 1vw;">
+    <button type="button" class="btn " data-toggle="modal" data-target="#NGOModal">Add NGO</button>
+</li>
+<!-- Modal Popup for Login -->
+<div class="modal fade" id="NGOModal" tabindex="-1" role="dialog" aria-labelledby="NGOModallabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form asp-action="AddNGO" asp-controller="Admin" method="post" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#f44336;color :white;">
+                    <h5 class="modal-title mx-auto text-center lead font-weight-bold" id="NGOModalLabel">Add your NGO</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="returnUrl"
+                           value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <div class="form-group">
+                        <label class="lead" asp-for="NgoName">NGOModal Name</label>
+                        <input type="text" class="form-control" placeholder="Enter your NGO's name"
+                               asp-for="NgoName" />
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="work">What do you do?</label>
+                        <input type="text" class="form-control" asp-for="work" placeholder="Enter your work information">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="team">Who do you work with?</label>
+                        <input type="text" class="form-control" asp-for="team" placeholder="Enter your team information">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="categoryId">Category Id</label>
+                        <select class="form-control dropdown" asp-for="categoryId">
+                            @for (int i = 1; i <= 9; i++)
+                            {
+                                <option value="@i">@CategoryDict.Categories[i]</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="NgoAddress">Where do you work?</label>
+                        <input type="text" class="form-control" asp-for="NgoAddress" placeholder="Enter your work place">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control" asp-for="phoneNumber" placeholder="Enter your NGOModal's Phone Number" />
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="instagramLink">Instagram</label>
+                        <input type="text" class="form-control" asp-for="instagramLink" placeholder="Enter your NGOModal's instagram link">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="facebookLink">Facebook</label>
+                        <input type="text" class="form-control" asp-for="facebookLink" placeholder="Enter your NGOModal's facebook link" />
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="websiteLink">Website</label>
+                        <input type="text" class="form-control" asp-for="websiteLink" placeholder="Enter your NGOModal's Website Link" />
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="imageUpload">Upload your Logo</label>
+                        <input type="file" asp-for="imageUpload" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary lead" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary lead">Add your NGOModal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    @foreach (NGO i in ViewBag.ngos)
+    {
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-auto">
+                    
+                    <img src="@i.filepath" class="img-fluid" alt="" style="width:10vw;">
+                </div>
+                <div class="col">
+                    <div class="card-block px-2">
+                        <h4 class="card-title"><lead>@i.NgoName</lead></h4>
+                        <p class="card-text">
+                            <b>What do we do:</b><br />
+                            @i.work <br />
+                            <b>Who do we work with: </b><br />
+                            @i.team<br />
+                            <b>Where do we work:</b><br />
+                            @i.NgoAddress<br />
+                        </p>
+                        
+                        <a href="@Url.Action("ngoButton","Admin",new {  id = i.NGOId})" class="btn btn-primary">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer w-100 text-muted">
+                <p>
+                    Contact Info:<br />
+                    @if (i.phoneNumber != null)
+                    {
+                        string j = "Phone Number:" + i.phoneNumber;
+                        @j;
+                        <br />
+                    }
+                    @if (i.instagramLink != null)
+                    {
+                        string j = "Instagram: " + i.instagramLink;
+                        @j;
+                        <br />
+                    }
+                    @if (i.websiteLink != null)
+                    {
+                        string j = "Website: " + i.websiteLink;
+                        @j;
+                        <br />
+                    }
+                </p>
+
+            </div>
+        </div>
+
+    }
+</div>
