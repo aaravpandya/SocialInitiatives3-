@@ -1,0 +1,252 @@
+﻿@model EventViewModel
+<div id="calender" style="padding-top:1vh;"></div>
+<div class="row" style="padding-top:3vh;">
+    <p class="display-4 mx-auto">
+        Want to register your event?
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <span><button class="btn" data-toggle="modal" data-target="#loginModal">Login to register your event</button></span>
+            }
+            else
+            {
+                <span><button class="btn" data-toggle="modal" data-target="#eventModal">Register now!</button></span>
+            }
+    </p>
+</div>
+<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="eventModallabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form asp-action="AddEvents" asp-controller="Calendar" method="post">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:#f44336;color :white;">
+                    <h5 class="modal-title mx-auto text-center lead font-weight-bold" style="font-size:1.5rem;" id="eventModalLabel" >Register your Event</h5>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="returnUrl"
+                           value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <div class="form-group">
+                        <label class="lead" asp-for="Subject">Event Subject</label>
+                        <input type="text" class="form-control" placeholder="Event Subject"
+                               asp-for="Subject" />
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="Organizer">Organizer Name</label>
+                        <input type="text" class="form-control" placeholder="Organizer Name" asp-for="Organizer" />
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="OrganizerEmail">Organizer Email</label>
+                        <input type="email" class="form-control" asp-for="OrganizerEmail" placeholder="Email Address">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="PhoneNumber">Organizer Contact Number</label>
+                        <input type="number" class="form-control" asp-for="PhoneNumber" placeholder="Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="Description">What is your event about?</label>
+                        <input type="text" class="form-control" asp-for="Description" placeholder="Describe your event">
+                    </div>
+                    <div class="form-group">
+
+                        <div class="form-group">
+                            <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                                <label class="lead" style="padding-right:0.5vw;" asp-for="Start">Start date and time </label>
+                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7" asp-for="Start" />
+                                <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                            <label class="lead" style="padding-right:1vw;" asp-for="End">End date and time </label>
+                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8" asp-for="End" />
+                            <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar fa-md"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary lead" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary lead">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div class="row" style="padding-top:3vh; padding-bottom:3vh;">
+    <div class="col mx-auto">
+        <form asp-action="AddEvents" asp-controller="Calendar" method="post">
+            <input type="hidden" name="returnUrl"
+                   value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <div class="form-group">
+                <label asp-for="Subject">Event Subject</label>
+                <input type="text" class="form-control" placeholder="Event Subject"
+                       asp-for="Subject" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Organizer">Organizer Name</label>
+                <input type="text" class="form-control" placeholder="Organizer Name" asp-for="Organizer" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OrganizerEmail">Organizer Email</label>
+                <input type="email" class="form-control" asp-for="OrganizerEmail" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber">Organizer Contact Number</label>
+                <input type="number" class="form-control" asp-for="PhoneNumber" placeholder="Phone Number">
+            </div>
+            <div class="form-group">
+                <label asp-for="Description">What is your event about?</label>
+                <input type="text" class="form-control" asp-for="Description" placeholder="Describe your event">
+            </div>
+            <div class="form-group">
+                
+                <div class="form-group">
+                    <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                        <label asp-for="Start">Start date and time</label>
+                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7" asp-for="Start" />
+                        <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                    <label asp-for="End">End date and time</label>
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8" asp-for="End" />
+                    <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar fa-md"></i></div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>*@
+
+
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="pDetails"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+        @section Scripts{
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+
+            <script>
+                $(document).ready(function () {
+                    var event_array = [];
+                    $.ajax({
+                        url: "/Api/GetEvents",
+                        data: "",
+                        type: "GET",
+                        dataType: "json",
+                        async: false,
+                        cache: false,
+                        success: function (data) {
+
+                            $.each(data, function (i, v) {
+                                event_array.push({
+                                    title: v.subject,
+                                    description: v.description,
+                                    start: moment(v.start),
+                                    end: v.end != null ? moment(v.end) : null,
+                                    color: v.themeColor,
+                                    allDay: v.isFullDay
+                                });
+                            })
+
+                            GenerateCalender(event_array);
+                        },
+                        error: function (error) {
+                            alert('failed');
+                        }
+                    });
+                    $('#datetimepicker7').datetimepicker({
+                    });
+                    $('#datetimepicker8').datetimepicker({
+                        useCurrent: false,
+                    });
+                    $("#datetimepicker7").on("change.datetimepicker", function (e) {
+                        $('#datetimepicker8').datetimepicker('minDate', e.date);
+                    });
+                    $("#datetimepicker8").on("change.datetimepicker", function (e) {
+                        $('#datetimepicker7').datetimepicker('maxDate', e.date);
+                    });
+                    function GenerateCalender(events) {
+                        $('#calender').fullCalendar('destroy');
+                        $('#calender').fullCalendar({
+                            contentHeight: 400,
+                            defaultDate: new Date(),
+                            timeFormat: 'h(:mm)a',
+                            header: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'month,basicWeek,basicDay,agenda'
+                            },
+                            eventLimit: true,
+                            eventColor: '#378006',
+                            events: event_array,
+                            //eventClick: function (calEvent, jsEvent, view) {
+                            //    $('#myModal #eventTitle').text(calEvent.title);
+                            //    var $description = $('<div/>');
+                            //    $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                            //    if (calEvent.end != null) {
+                            //        $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                            //    }
+                            //    $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                            //    $('#myModal #pDetails').empty().html($description);
+
+                            //    $('#myModal').modal();
+                            //}
+                            //eventRender: function (event, element) {
+                            //    $(element).popover({ title: event.title});
+                            //}
+                            //eventRender: function (event, element) {
+                            //    element.popover({
+                            //        title: event.title,
+                            //        content: function () {
+                            //            return $("#popoverContent").html();
+                            //        },
+                            //        template: popTemplate,
+                            //        placement: 'left',
+                            //        html: 'true',
+                            //        trigger: 'click',
+                            //        animation: 'true',
+                            //        container: 'body'
+                            //    });
+                            eventRender: function (calEvent, $el) {
+                                $el.popover({
+                                    title: calEvent.title,
+                                    content: "Hello" + calEvent.start,
+                                    start: calEvent.start,
+                                    end: calEvent.end,
+                                    trigger: "hover",
+                                    placement: "top",
+                                    container: "body"
+                                });
+                            }
+                        })
+                    }
+                })
+            </script>
+        }
+    </div>
+</div>

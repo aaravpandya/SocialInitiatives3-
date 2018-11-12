@@ -1,0 +1,16 @@
+﻿
+<div class="row" style="padding-top:18vh;padding-bottom:18vh;margin-left:0.5vw;">
+    @for (int i = 1; i <= 9; i++)
+    {
+        string s = "/Images/Initiatives/" + i.ToString() + ".png";
+        <div class="col mx-auto">
+            <a href="@Url.Action("Category","Initiatives",new { id = i})">
+                <img src="@s" style="width:8vw; padding:0,0,0,0; border-radius:1rem;" />
+                @{
+                    string a = CategoryDict.Categories[i];
+                }
+                <figcaption class="figure-caption font-weight-bold text-center" style="padding-right:1.5vw;">@a</figcaption>
+            </a>
+        </div>
+    }
+</div>

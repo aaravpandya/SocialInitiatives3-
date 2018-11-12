@@ -1,0 +1,221 @@
+﻿
+    @{
+    Layout = "_AdminLayout";
+}
+
+
+<style>
+
+    ul.nav-pills {
+        padding-top: 5vh;
+        position: fixed;
+    }
+    .nav-link{
+        color: #f44336;
+    }
+    .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #f44336;
+}
+</style>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-sm-3 col-4" id="myScrollspy" style="border-right-style:solid;">
+            <ul class="nav nav-pills flex-column">
+                <p class="display-4 mx-auto"> Menu </p>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#section1">Initiatives @ViewBag.userModel.Name Have Volunteered In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section2">Events added by @ViewBag.userModel.Name</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#section3">Initiatives added by @ViewBag.userModel.Name</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="col-sm-9 col-8">
+            <div id="section1">
+                <h1 class="display-4 mx-auto">Initiatives volunteered by @ViewBag.userModel.Name</h1>
+                @if(ViewBag.uvlist.Count == 0)
+                {
+                    <p class="lead text-center" style="padding-top:3vh;">@ViewBag.userModel.Name havent volunteered in any Initiative. </p>
+                }
+                @foreach (Initiative i in ViewBag.uvlist)
+                {
+                    <div class="card" style="margin-right:5vw;">
+                        <div class="row no-gutters">
+                            <div class="col-auto">
+                                <img src="@i.filepath" class="img-fluid" alt="" style="width:10vw;">
+                            </div>
+                            <div class="col">
+                                <div class="card-block px-2">
+                                    <h4 class="card-title"><lead>@i.InitiativeName</lead></h4>
+                                    <p class="card-text">
+                                        <b>What do we do:</b><br />
+                                        @i.work <br />
+                                        <b>Who do we work with: </b><br />
+                                        @i.team<br />
+                                        <b>Where do we work:</b><br />
+                                        @i.InitiativeAddress<br />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer w-100 text-muted">
+                            <p>
+                                Contact Info:<br />
+                                @if (i.phoneNumber != null)
+                                {
+                                    string j = "Phone Number:" + i.phoneNumber;
+                                    @j;
+                                    <br />
+                                }
+                                @if (i.instagramLink != null)
+                                {
+                                    string j = "Instagram: " + i.instagramLink;
+                                    @j;
+                                    <br />
+                                }
+                                @if (i.websiteLink != null)
+                                {
+                                    string j = "Website: " + i.websiteLink;
+                                    @j;
+                                    <br />
+                                }
+                                @if (i.User.Email != null)
+                                {
+                                    string j = "User Email: " + i.User.Email;
+                                    @j;
+                                    <br />
+                                }
+                            </p>
+
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div id="section2">
+                <h1 class="display-4 mx-auto">Initiatives Added By @ViewBag.userModel.Name</h1>
+                @foreach (var i in ViewBag.Initiatives)
+                {
+
+                    @foreach (Initiative t in i)
+                    {<div style="padding-top:4vh;">
+                        <div class="card mx-auto" style="padding-top:1vh;">
+                            <div class="row no-gutters">
+                                <div class="col-auto" style="padding-top:2vh; padding-left:2vh;">
+                                    <img src="@t.filepath" class="img-fluid" alt="" style="width:10vw;">
+                                </div>
+                                <div class="col" style="padding-bottom:2vh;">
+                                    <div class="card-block px-2">
+                                        <h4 class="card-title"><lead>@t.InitiativeName</lead></h4>
+                                        <p class="card-text">
+                                            <b>What do we do:</b><br />
+                                            @t.work <br />
+                                            <b>Who do we work with: </b><br />
+                                            @t.team<br />
+                                            <b>Where do we work:</b><br />
+                                            @t.InitiativeAddress<br />
+                                        </p>
+                                       </div>
+                                </div>
+                            </div>
+                            <div class="card-footer w-100 text-muted">
+                                    Contact Info:<br />
+                                    @if (t.phoneNumber != null)
+                                    {
+                                        string j = "Phone Number:" + t.phoneNumber;
+                                        @j;
+                                        <br />
+                                    }
+                                    @if (t.instagramLink != null)
+                                    {
+                                        string j = "Instagram: " + t.instagramLink;
+                                        @j;
+                                        <br />
+                                    }
+                                    @if (t.websiteLink != null)
+                                    {
+                                        string j = "Website: " + t.websiteLink;
+                                        @j;
+                                        <br />
+                                    }
+                                    @if (t.User.Email != null)
+                                    {
+                                        string j = "User Email: " + t.User.Email;
+                                        @j;
+                                        <br />
+                                    }
+
+                            </div>
+                        </div>
+
+                        </div>
+                        
+                    }
+
+                }
+            </div>
+            <div id="section3">
+                <h1 class="display-4 mx-auto">Events Added By  @ViewBag.userModel.Name</h1>
+                @{
+        int count = ViewBag.events.Count;
+    }
+     <table class="mx-auto">
+         @for(int i = 0; i<count; )
+    {
+       
+            <tr>
+                <td>
+                    @if(i<count)
+                    {<div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.events[i].Subject</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.events[i].Organiser <br/> @ViewBag.events[i].OrganiserEmail <br/> @ViewBag.events[i].PhoneNumber</h6>
+                            <p class="card-text">@ViewBag.events[i].Description</p>
+                        </div>
+                    </div>
+                }
+                </td>
+                <td>
+                    
+                    @if((i + 1)<count)
+                    {
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.events[++i].Subject</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@ViewBag.events[i].Organiser <br/> @ViewBag.events[i].OrganiserEmail <br/> @ViewBag.events[i].PhoneNumber</h6>
+                                <p class="card-text">@ViewBag.events[i].Description</p>
+                            </div>
+                        </div>
+                    }
+                    
+                </td>
+                <td>
+                    @if((i + 1)<count)
+                    {
+<div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.events[++i].Subject</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.events[i].Organiser <br/> @ViewBag.events[i].OrganiserEmail <br/> @ViewBag.events[i].PhoneNumber</h6>
+                            <p class="card-text">@ViewBag.events[i].Description</p>
+                        </div>
+                    </div>
+                    }
+                </td>
+            </tr>
+            i++;
+            
+    }
+     </table>
+    
+            </div>
+        </div>
+    </div>
+</div>

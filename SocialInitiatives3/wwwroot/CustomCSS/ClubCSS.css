@@ -1,0 +1,19 @@
+﻿
+.zoom {
+    transition: transform .2s;
+}
+
+    .zoom:hover {
+        -ms-transform: scale(1.2); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.2);
+    }
+
+.solidborder {
+    border-style: solid;
+    border-color: #f44336;
+}
+
+.lead {
+    font-size:1.5rem;
+}

@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "ClubForms";
+    Layout = "_AdminLayout";
+}
+    @{
+        int count = ViewBag.clubUsers.Count;
+    }
+<table>
+         @for(int i = 0; i<count; )
+    {
+            <tr>
+                <td>
+                    @if(i<count)
+                    {
+                        <div class="card" style="width: 18rem; margin-left:3vw;">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.clubUsers[i].UserName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.clubUsers[i].Organiser <br/> @ViewBag.clubUsers[i].OrganiserEmail <br/> @ViewBag.clubUsers[i].PhoneNumber</h6>
+                            <p class="card-text">
+                                Class : @ViewBag.clubUsers[i].Class <br/>
+                                Section : @ViewBag.clubUsers[i].Section <br/>
+                            </p>
+                        </div>
+                        </div>
+                    
+                }
+                </td>
+                <td>
+                    
+                    @if((i + 1)<count)
+                    {
+                        
+                        <div class="card" style="width: 18rem; margin-left:3vw;">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.clubUsers[++i].UserName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.clubUsers[i].Organiser <br/> @ViewBag.clubUsers[i].OrganiserEmail <br/> @ViewBag.clubUsers[i].PhoneNumber</h6>
+                            <p class="card-text">
+                                Class : @ViewBag.clubUsers[i].Class <br/>
+                                Section : @ViewBag.clubUsers[i].Section <br/>
+                            </p>
+                        </div>
+                        </div>
+                    }
+                    
+                </td>
+                <td>
+                    @if((i + 1)<count)
+                    {
+                        <div class="card" style="width: 18rem; margin-left:3vw;">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.clubUsers[++i].UserName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.clubUsers[i].Organiser <br/> @ViewBag.clubUsers[i].OrganiserEmail <br/> @ViewBag.clubUsers[i].PhoneNumber</h6>
+                            <p class="card-text">
+                                Class : @ViewBag.clubUsers[i].Class <br/>
+                                Section : @ViewBag.clubUsers[i].Section <br/>
+                            </p>
+                        </div>
+                        </div>
+
+                    }
+                </td>
+                <td>
+                    @if((i + 1)<count)
+                    {
+
+                        <div class="card" style="width: 18rem; margin-left:3vw;">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.clubUsers[++i].UserName</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.clubUsers[i].Organiser <br/> @ViewBag.clubUsers[i].OrganiserEmail <br/> @ViewBag.clubUsers[i].PhoneNumber</h6>
+                            <p class="card-text">
+                                Class : @ViewBag.clubUsers[i].Class <br/>
+                                Section : @ViewBag.clubUsers[i].Section <br/>
+                            </p>
+                        </div>
+                        </div>
+                    }
+                </td>
+            </tr>
+            i++;
+            
+    }
+     </table>

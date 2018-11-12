@@ -1,0 +1,92 @@
+﻿@model SYOIViewModel
+<link href="~/CustomCSS/InitiativeCSS.css" rel="stylesheet" />
+<div class="row">
+    <p class="display-1 mx-auto">
+      Start your own Initiative!  
+    </p>
+</div>
+<div style="padding-top:3vw;padding-bottom:3vw;">
+    <form asp-action="PublishForm" asp-controller="StartYourOwnInitiative" method="post">
+        <input type="hidden" name="returnUrl"
+               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        <div class="form-group">
+            <div class="media">
+                <video id="leftVid" controls="controls">
+                    <source src="~/Videos/SYOI/1.mp4" type="video/mp4" />
+                </video>
+                <div class="col-6 mx-auto media-body">
+                    <h5 class="display-4 text-center text-center" >Your Cause</h5>
+                    <textarea style="border-style:solid;border-color:Black;border-width:2px" class="form-control mx-auto mx-auto" rows="5" id="comment" placeholder="Your cause - what problem are you solving?"
+                           asp-for="cause" ></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="media">
+                <div class="col-6 mx-auto media-body">
+                    <h5 class="display-4 text-center text-center" >Your idea</h5>
+                    <textarea style="border-style:solid;border-color:Black;border-width:2px" class="form-control mx-auto mx-auto" rows="5" id="comment" asp-for="idea" style="text-align: right;" placeholder="Your idea - How does it address the problem?"></textarea>
+                    
+                </div>
+                <video id="rightVid" controls="controls">
+                    <source src="~/Videos/SYOI/2.mp4" type="video/mp4" />
+                </video>
+
+
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="media">
+                <video id="leftVid" controls="controls">
+                    <source src="~/Videos/SYOI/3.mp4" type="video/mp4" />
+                </video>
+                <div class="col-6 mx-auto media-body">
+                    <h5 class="display-4 text-center" >Your target group</h5>
+                    <textarea style="border-style:solid;border-color:Black;border-width:2px" class="form-control mx-auto" rows="5" id="comment" placeholder="Your target group - Who all are you helping?"
+                           asp-for="targetGroup"></textarea>
+                
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="media">
+                <div class="col-6 mx-auto media-body">
+                    <h5 class="display-4 text-center">Your team</h5>
+                    <textarea style="border-style:solid;border-color:Black;border-width:2px" class="form-control mx-auto" rows="5" id="comment" asp-for="team" style="text-align: right;" placeholder="Your team - Who all are you working with?"></textarea>
+                    
+                </div>
+                <video id="rightVid" controls="controls">
+                    <source src="~/Videos/SYOI/4.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="media">
+                <video id="leftVid" controls="controls">
+                    <source src="~/Videos/SYOI/5.mp4" type="video/mp4" />
+                </video>
+                <div class="col-6 mx-auto media-body">
+                    <h5 class="display-4 text-center" >Your resources</h5>
+                    <textarea style="border-style:solid;border-color:Black;border-width:2px" class="form-control mx-auto" rows="5" id="comment" placeholder="What are your resources?"
+                              asp-for="resources"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mx-auto">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <span><button class="btn" data-toggle="modal" data-target="#loginModal">Login to suggest your Idea</button></span>
+                }
+                else
+                {
+                    <button style="margin-left:2vw;" type="submit" class="btn btn-primary">Submit</button>
+                }
+                
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,91 @@
+﻿<link href="~/CustomCSS/GalleryCSS.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <p class="display-1 mx-auto">
+        Gallery
+    </p>
+</div>
+<div class="col" style="padding-left:0;padding-right:0;">
+    <div id="picCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#picCarousel" data-slide-to="0" class="active"></li>
+            @for (int i = 1; i <= 5; i++)
+            {
+                <li data-target="#picCarousel" data-slide-to="@i"></li>
+            }
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active" style="height:80vh;">
+                <img class="d-block w-100 tales" src="~/Images/Gallery/1.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item" style="height:80vh;">
+                <img class="d-block w-100 tales" src="~/Images/Gallery/2.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item" style="height:80vh;">
+                <img class="d-block w-100 tales" src="~/Images/Gallery/3.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item" style="height:80vh;">
+                <img class="d-block w-100 tales" src="~/Images/Gallery/4.jpg" alt="Fourth slide">
+            </div>
+            <div class="carousel-item" style="height:80vh;">
+                <img class="d-block w-100 tales" src="~/Imags/Gallery/5.jpg" alt="Fifth slide">
+            </div>
+            <div class="carousel-item" style="height:80vh;">
+                <img class="d-block w-100 tales" src="~/Images/Gallery/6.jpg" alt="Fifth slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#picCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#picCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+
+<!-- Photo Grid -->
+<hr />
+<div class="row" style="padding-top:3vh;">
+    <p class="display-4 mx-auto">
+        Check out all our photos!
+    </p>
+</div>
+<div class="row">
+    <div class="column">
+        @for (int i = 1; i <= 4; i++)
+        {
+            string f = "/Images/Gallery/" + i + ".jpg";
+            <img class="zoom" src=@f style="width:100%">
+
+        }
+    </div>
+    <div class="column">
+        @for (int i = 5; i <= 8; i++)
+        {
+            string f = "/Images/Gallery/" + i + ".jpg";
+            <img class="zoom" src=@f style="width:100%">
+
+        }
+    </div>
+    <div class="column">
+        @for (int i = 9; i <= 12; i++)
+        {
+            string f = "/Images/Gallery/" + i + ".jpg";
+            <img class="zoom" src=@f style="width:100%">
+
+        }
+    </div>
+    <div class="column">
+        @for (int i = 12; i <= 16; i++)
+        {
+            string f = "/Images/Gallery/" + i + ".jpg";
+            <img class="zoom" src=@f style="width:100%">
+
+        }
+    </div>
+</div>

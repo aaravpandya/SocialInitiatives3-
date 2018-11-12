@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewData["Title"] = "SYOI";
+    Layout = "_AdminLayout";
+}
+
+@{
+        int count = ViewBag.SYOIs.Count;
+    }
+     <table style="margin-left:4vw; margin-top:2vh;">
+         @for(int i = 0; i<count; )
+    {
+       
+            <tr>
+                <td>
+                    @if(i<count)
+                    {
+                        <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Cause : @ViewBag.SYOIs[i].cause</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.SYOIs[i].User.Email</h6>
+            <p class="card-text">
+              Idea : @ViewBag.SYOIs[i].idea <br/>
+               Resources:  @ViewBag.SYOIs[i].resources <br/>
+               Team:  @ViewBag.SYOIs[i].team<br/>
+            </p>
+            <a href="@Url.Action("SYOIDeleteButton","Admin",new { init = ViewBag.SYOIs[i].SYOIId})" class="card-link">Delete</a>
+        </div>
+    </div>
+
+                }
+                </td>
+                <td>
+                    
+                    @if((i + 1)<count)
+                    {
+                    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Cause : @ViewBag.SYOIs[i].cause</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.SYOIs[i].User.Email</h6>
+            <p class="card-text">
+              Idea : @ViewBag.SYOIs[i].idea <br/>
+               Resources:  @ViewBag.SYOIs[i].resources <br/>
+               Team:  @ViewBag.SYOIs[i].team<br/>
+            </p>
+            <a href="@Url.Action("SYOIButton","Admin",new { init = ViewBag.SYOIs[i].SYOIId})" class="card-link">Delete</a>
+        </div>
+    </div>
+
+                    }
+                    
+                </td>
+                <td>
+                    @if((i + 1)<count)
+                    {
+<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Cause : @ViewBag.SYOIs[i].cause</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.SYOIs[i].User.Email</h6>
+            <p class="card-text">
+              Idea : @ViewBag.SYOIs[i].idea <br/>
+               Resources:  @ViewBag.SYOIs[i].resources <br/>
+               Team:  @ViewBag.SYOIs[i].team<br/>
+            </p>
+            <a href="@Url.Action("SYOIButton","Admin",new { init = ViewBag.SYOIs[i].SYOIId})" class="card-link">Delete</a>
+        </div>
+    </div>
+
+                    }
+                </td>
+                <td>
+                    @if((i + 1)<count)
+                    {
+<div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Cause : @ViewBag.SYOIs[i].cause</h5>
+            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.SYOIs[i].User.Email</h6>
+            <p class="card-text">
+              Idea : @ViewBag.SYOIs[i].idea <br/>
+               Resources:  @ViewBag.SYOIs[i].resources <br/>
+               Team:  @ViewBag.SYOIs[i].team<br/>
+            </p>
+            <a href="@Url.Action("SYOIButton","Admin",new { init = ViewBag.SYOIs[i].SYOIId})" class="card-link">Delete</a>
+        </div>
+    </div>
+
+                    }
+                </td>
+            </tr>
+            i++;
+            
+    }
+     </table>
+    

@@ -1,0 +1,73 @@
+﻿@model RegisterModel
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col" style="padding-left:0;padding-right:0;">
+            <div id="picCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#picCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#picCarousel" data-slide-to="1"></li>
+                    <li data-target="#picCarousel" data-slide-to="2"></li>
+                    <li data-target="#picCarousel" data-slide-to="3"></li>
+                    <li data-target="#picCarousel" data-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active" style="height:80vh;">
+                        <img class="d-block w-100 tales" src="~/Images/Homepage3/1.gif" alt="First slide">
+                    </div>
+                    <div class="carousel-item" style="height:80vh;">
+                        <img class="d-block w-100 tales" src="~/Images/Homepage3/2.gif" alt="Second slide">
+                    </div>
+                    <div class="carousel-item" style="height:80vh;">
+                        <img class="d-block w-100 tales" src="~/Images/Homepage3/3.jfif" alt="Third slide">
+                    </div>
+                    <div class="carousel-item" style="height:80vh;">
+                        <img class="d-block w-100 tales" src="~/Images/Homepage3/4.gif" alt="Fourth slide">
+                    </div>
+                    <div class="carousel-item" style="height:80vh;">
+                        <img class="d-block w-100 tales" src="~/Images/Homepage3/5.gif" alt="Fifth slide">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#picCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#picCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @*<div class="col">
+                <p class="lead">
+                    Welcome to the social initiatives website! This website is a one-step platform for interested students like you to volunteer for causes you are passionate about or start your initiative! You can always attend our meetings by joining the social initiatives club. Have fun!
+                </p>
+            </div>
+            <div class="col">
+                <video controls="controls">
+                    <source src="~/Videos/HomePage/Welcome.mp4" type="video/mp4" />
+                </video>
+            </div>*@
+        <div class="col mx-auto">
+
+            <div class="media ">
+                <div class="row mx-auto" style="padding-top:5vh;">
+                    <div class="col-6 mr-auto">
+                        <video id="videoone" class="mr-3" controls="controls">
+                            <source src="~/Videos/HomePage/Welcome.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+                    <div class="col-4 mx-auto media-body">
+                        <h5 class="display-4 text-center">Welcome</h5>
+                        <p class="lead text-center" style="font-size:1.5rem;">
+                            Welcome to the social initiatives website! This website is a one-step platform for interested students like you to volunteer for causes you are passionate about or start your initiative! You can always attend our meetings by joining the social initiatives club. Have fun!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

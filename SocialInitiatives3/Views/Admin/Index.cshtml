@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="container-fluid">
+
+    @foreach (Initiative i in ViewBag.initiatives)
+    {
+        <div class="card">
+            <div class="row no-gutters">
+                <div class="col-auto">
+                    <img src="@i.filepath" class="img-fluid" alt="" style="width:10vw;">
+                </div>
+                <div class="col">
+                    <div class="card-block px-2">
+                        <h4 class="card-title"><lead>@i.InitiativeName</lead></h4>
+                        <p class="card-text">
+                            <b>What do we do:</b><br />
+                            @i.work <br />
+                            <b>Who do we work with: </b><br />
+                            @i.team<br />
+                            <b>Where do we work:</b><br />
+                            @i.InitiativeAddress<br />
+                        </p>
+                        <a href="@Url.Action("InitiativeButton","Admin",new { id = "1", init = i.InitiativeId})" class="btn btn-primary">Approve</a>
+                        <a href="@Url.Action("InitiativeButton","Admin",new { id = "2", init = i.InitiativeId})" class="btn btn-primary">Delete</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer w-100 text-muted">
+                <p>
+                    Contact Info:<br />
+                    @if (i.phoneNumber != null)
+                    {
+                        string j = "Phone Number:" + i.phoneNumber;
+                        @j;
+                        <br />
+                    }
+                    @if (i.instagramLink != null)
+                    {
+                        string j = "Instagram: " + i.instagramLink;
+                        @j;
+                        <br />
+                    }
+                    @if (i.websiteLink != null)
+                    {
+                        string j = "Website: " + i.websiteLink;
+                        @j;
+                        <br />
+                    }
+                    @if (i.User.Email != null)
+                    {
+                        string j = "User Email: " + i.User.Email;
+                        @j;
+                        <br />
+                    }
+                </p>
+
+            </div>
+        </div>
+
+    }
+</div>

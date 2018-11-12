@@ -1,0 +1,60 @@
+﻿/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    ...
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    ...
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    ...
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    ...
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  #picCarousel {
+      height:80vh;
+  }
+  #videoone{
+      width : 45rem;
+  }
+}
+
+.carousel-item {
+    width:100vw;
+    height:80vh;
+}
+
+.btn {
+    background-color: #f44336;
+    border-color: #f44336;
+    color : white;
+}
+.btn:hover {
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+label{
+    font-size:1.5rem;
+}
+
+.dropdown-item:hover {
+    background-color: #f44336;
+    color:white;
+}
+
+/*#nav1 {
+    background-color: #F00; whichever you want
+    opacity: 0.5;
+    filter: (opacity=50);
+}*/
