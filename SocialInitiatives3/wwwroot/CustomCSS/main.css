@@ -1,21 +1,27 @@
 ﻿/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    ...
+    .lead{
+        font-size: 1rem;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    ...
+    .lead{
+        font-size: 1rem;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    ...
+    .lead{
+        font-size: 1rem;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    ...
+    
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -26,8 +32,15 @@
   #videoone{
       width : 45rem;
   }
+  label{
+    font-size:1.5rem;
 }
 
+}
+
+.lead{
+    font-size:1.5rem;
+}
 .carousel-item {
     width:100vw;
     height:80vh;
@@ -42,10 +55,6 @@
     background-color: black;
     border-color: black;
     color: white;
-}
-
-label{
-    font-size:1.5rem;
 }
 
 .dropdown-item:hover {
