@@ -1,7 +1,7 @@
 ﻿@model RegisterModel
-
-<div class="container-fluid" >
-    <div class="row" >
+<link href="~/CustomCSS/Home.css" rel="stylesheet" />
+<div class="container-fluid">
+    <div class="row">
         <div class="col" style="padding-left:0;padding-right:0;">
             <div id="picCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -11,20 +11,20 @@
                     <li data-target="#picCarousel" data-slide-to="3"></li>
                     <li data-target="#picCarousel" data-slide-to="4"></li>
                 </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active" style="height:80vh;">
+                <div class="carousel-inner" style="height:100%">
+                    <div class="carousel-item active">
                         <img class="d-block w-100 tales" src="~/Images/Homepage3/1.gif" alt="First slide">
                     </div>
-                    <div class="carousel-item" style="height:80vh;">
+                    <div class="carousel-item">
                         <img class="d-block w-100 tales" src="~/Images/Homepage3/2.gif" alt="Second slide">
                     </div>
-                    <div class="carousel-item" style="height:80vh;">
+                    <div class="carousel-item">
                         <img class="d-block w-100 tales" src="~/Images/Homepage3/3.jfif" alt="Third slide">
                     </div>
-                    <div class="carousel-item" style="height:80vh;">
+                    <div class="carousel-item">
                         <img class="d-block w-100 tales" src="~/Images/Homepage3/4.gif" alt="Fourth slide">
                     </div>
-                    <div class="carousel-item" style="height:80vh;">
+                    <div class="carousel-item">
                         <img class="d-block w-100 tales" src="~/Images/Homepage3/5.gif" alt="Fifth slide">
                     </div>
                 </div>
@@ -39,18 +39,34 @@
             </div>
         </div>
     </div>
-    <div class="row mx-auto media" style="padding-top:5vh;">
-                    <div class="col-6 mr-auto">
-                        <video id="videoone" class="mr-3" controls="controls">
-                            <source src="~/Videos/HomePage/Welcome.mp4" type="video/mp4" />
-                        </video>
-                    </div>
-                    <div class="col-4 mx-auto media-body">
-                        <h5 class="display-4 text-center">Welcome</h5>
-                        <p class="lead text-center">
-                            Welcome to the social initiatives website! This website is a one-step platform for interested students like you to volunteer for causes you are passionate about or start your initiative! You can always attend our meetings by joining the social initiatives club. Have fun!
-                        </p>
-                    </div>
+    <div class="row mx-auto media Desktop" style="padding-top:5vh;">
+        <div class="col-6 mr-auto">
+
+            @*<source src="~/Videos/HomePage/Welcome.mp4" type="video/mp4" />*@
+            <iframe src="https://www.youtube.com/embed/m7SjggBq7X0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        </div>
+        <div class="col-4 mx-auto media-body">
+            <h5 class="display-4 text-center">Welcome</h5>
+            <p class="lead text-center">
+                Welcome to the social initiatives website! This website is a one-step platform for interested students like you to volunteer for causes you are passionate about or start your initiative! You can always attend our meetings by joining the social initiatives club. Have fun!
+            </p>
+        </div>
+
+    </div>
+    <div class="row mx-auto media Mobile" style="padding-top:5vh;">
+        <div class="row mx-auto">
+
+            @*<source src="~/Videos/HomePage/Welcome.mp4" type="video/mp4" />*@
+            <iframe class="mx-auto" src="https://www.youtube.com/embed/m7SjggBq7X0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+        </div>
+        <div class="row mx-auto">
+            <p class="lead font-weight-bold mx-auto">Welcome</p>
+            <p class="lead text-center">
+                Welcome to the social initiatives website! This website is a one-step platform for interested students like you to volunteer for causes you are passionate about or start your initiative! You can always attend our meetings by joining the social initiatives club. Have fun!
+            </p>
+        </div>
 
     </div>
 </div>

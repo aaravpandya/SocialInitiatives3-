@@ -1,41 +1,50 @@
-﻿@media only screen and (max-width: 600px) {
-    .Mobile {
-        display: block;
+﻿
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    .Mobile{
+        display: flex;
     }
 
     .Desktop {
         display: none;
     }
-    .image{
-        height:10vh;
+    #videoone {
+        width: 5rem;
+    }
+    .carousel-item{
+        height:auto;
     }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+
     .Mobile {
-        display: block;
+        display: flex;
     }
 
     .Desktop {
         display: none;
     }
-    .image {
-        height: 10vh;
+    #videoone {
+        width: 1rem;
+    }
+    .carousel-item {
+        height: auto;
     }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+
     .Mobile {
-        display: block;
+        display: flex;
     }
 
     .Desktop {
         display: none;
-    }
-    .image {
-        height: 10vh;
     }
 }
 
@@ -46,10 +55,10 @@
     }
 
     .Desktop {
-        display: block;
+        display: flex;
     }
-    .image {
-        height: 20vh;
+    .carousel-item {
+        height: auto;
     }
 }
 
@@ -60,18 +69,11 @@
     }
 
     .Desktop {
-        display: block;
+        display: flex;
     }
-    .image {
-        height: 20vh;
+    #picCarousel {
+        height: 80vh;
     }
+
 }
 
-lead{
-    font-weight:bold;
-}
-
-row{
-    padding-top:3vh;
-    padding-bottom:3vh;
-}

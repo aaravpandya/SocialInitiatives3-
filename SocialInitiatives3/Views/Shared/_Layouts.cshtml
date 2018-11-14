@@ -32,7 +32,7 @@
     }
     <link href="~/CustomCSS/main.css" rel="stylesheet" />
 </head>
-<body style="overflow:hidden" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+<body style="overflow-x:hidden" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
     <!-- NavBar -->
     <div class="container-fluid" style="padding-left:0; padding-right:0; @(ViewBag.SelectedNav == "Home" ? "background: rgba(0, 0, 0, 0.65);" : "") ">
         <nav class="navbar navbar-expand-lg @(ViewBag.SelectedNav == "Home" ? "bg-transparent navbar-dark" : "bg-dark navbar-dark") " id="nav1">
@@ -69,18 +69,6 @@
                             <a class="dropdown-item" style="@(ViewBag.SelectedNav == "Home"?"color:white;":"")" href="@Url.Action("Index","NGO")">NGO</a>
                         </div>
                     </li>
-                    @*<li class="nav-item @(ViewBag.SelectedNav == "Initiatives" ? "active" : "") ">
-                        <a class="nav-link" href="@Url.Action("Index","Initiatives")">
-                            Initiatives @if (ViewBag.SelectedNav == "Initiatives")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>
-                    <li class="nav-item @(ViewBag.SelectedNav == "NGO" ? "active" : "") ">
-                        <a class="nav-link" href="@Url.Action("Index","NGO")">
-                            NGO @if (ViewBag.SelectedNav == "NGO")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>*@
                     <li class="nav-item @(ViewBag.SelectedNav == "SYOI" ? "active" : "")">
                         <a class="nav-link" href="@Url.Action("Index","StartYourOwnInitiative")">
                             Start your own Initiative @if (ViewBag.SelectedNav == "SYOI")
@@ -167,12 +155,10 @@
             </form>
         </div>
     </div>
-    <div style="@(ViewBag.SelectedNav == "Home" ? "z-index:-1;position:absolute; top:0":"")">
-     
-
+    <div style="overflow-x:hidden;@(ViewBag.SelectedNav == "Home" ? "z-index:-1;position:absolute; top:0":"")" >
+        
         @RenderBody()
         
-
 
         
         @if (ViewBag.SelectedNav == "Calendar")
@@ -180,35 +166,52 @@
 
             @RenderSection("Scripts", false)
         }
-        
+       
         <div style="padding-top:3vh;">
             <div class="row bg-dark" style="padding-top:3vh;padding-bottom:3vh;">
             <table class="mx-auto">
-                <tr>
-                    <td>
+                <tr class="Desktop">
+                    <td >
                         <img src="~/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;"  />
                     </td>
-                    <td>
+                    <td >
                          <img src="~/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;"  />
                     </td>
                     <td class="lead align-middle" style="color:white; padding-left:2vw;">
                         ©2018 by TSRS Social Initiatives.
                     </td>
                 </tr>
+                <tr class="Mobile">
+                    <td class="float-left">
+                        <img src="/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;">
+                    </td>
+                    <td class="float-right">
+                        <img src="/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;">
+                    </td>
+                </tr>
+                <tr class="Mobile">
+                    <td class="align-middle text-center text-white lead" style="font-size" colspan="2">
+                        ©2018 by TSRS Social Initiatives.
+                    </td>
+                    
+                </tr>
             </table>
             </div>
-            <div class="row bg-dark" >
+             <div class="row bg-dark" >
                 <table class="lead mx-auto" style="color:white">
-                    <tr class="ml-auto">
-                        <th class="align-middle" style="padding-right:8vw;">
+                    <tr>
+                        <th class="align-middle Desktop" style="padding-right:8vw;">
+                            Contact
+                        </th>
+                        <th class="float-right Mobile" style="padding-right:4vw;">
                             Contact
                         </th>
                         <th class="align-middle">
                             Address
                         </th>
                     </tr>
-                    <tr class="mr-auto">
-                        <td class="align-middle" style="padding-right:8vw;">
+                    <tr>
+                        <td class="align-middle" style="padding-right:4vw;">
                             Example@email.com
                         </td>
                         <td class="align-middle">
