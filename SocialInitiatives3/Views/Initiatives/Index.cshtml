@@ -1,6 +1,8 @@
 ﻿@model InitiativeModel
+<link href="~/CustomCSS/init.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Index";
+    string p = @"style=margin-left:3vw; ";
 }
 <div class="container-fluid">
     <div class="row" style="padding-top:3vh;">
@@ -9,8 +11,9 @@
             string s = "/Images/Initiatives/" + i.ToString() + ".png";
             <div class="col mx-auto">
                 <a href="@Url.Action("Category","Initiatives",new { id = i})">
-                    <img src="@s" style="width:8vw; padding:0,0,0,0; border-radius:1rem;" />
-                    @{ 
+                    <img class="Desktop" src="@s" />
+                    <img class="Mobile" src="@s" @((i == 1 || i == 4 || i == 7) ? p : "") />
+                    @{
                         string a = CategoryDict.Categories[i];
                     }
                     <figcaption class="figure-caption font-weight-bold text-center" style="padding-right:1.5vw;">@a</figcaption>
@@ -20,7 +23,7 @@
     </div>
     <div class="row" style="padding-top: 12vh; padding-bottom:12vh;">
         <div class="mx-auto">
-            <p class="lead" style="font-size: 2rem;font-weight: 500;">
+            <p class="lead" style="font-size: 2rem;font-weight: 500;text-align:center">
                 Want to add your own Initiative?
                 @if (!User.Identity.IsAuthenticated)
                 {
@@ -39,7 +42,7 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background-color:#f44336;color :white;">
                         <h5 class="modal-title mx-auto text-center lead font-weight-bold" id="initiativeModalLabel">Add your Initiative</h5>
-                       
+
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="returnUrl"
@@ -59,10 +62,10 @@
                         </div>
                         <div class="form-group">
                             <label class="lead" asp-for="categoryId">Category Id</label>
-                            <select class="form-control dropdown" asp-for="categoryId" >
+                            <select class="form-control dropdown" asp-for="categoryId">
                                 @for (int i = 1; i <= 9; i++)
                                 {
-                                        <option value="@i">@CategoryDict.Categories[i]</option>
+                                    <option value="@i">@CategoryDict.Categories[i]</option>
                                 }
                             </select>
                         </div>
@@ -153,4 +156,3 @@
 
         </div>*@
 </div>
-    

@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Videos\**" />
+    <Content Remove="wwwroot\Videos\**" />
+    <EmbeddedResource Remove="wwwroot\Videos\**" />
+    <None Remove="wwwroot\Videos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Models\AppIdentityDbContext.cs" />
     <Compile Remove="Models\Person.cs" />
   </ItemGroup>
@@ -34,7 +41,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Images\SubmittedInitiativeImg\" />
-    <Folder Include="wwwroot\Videos\" />
   </ItemGroup>
 
 </Project>

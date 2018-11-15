@@ -1,7 +1,9 @@
 ﻿@model RegisterModel
-
+@{
+    string style = "style=overflow-x:hidden";
+}
 <!DOCTYPE html>
-<html>
+<html @(ViewBag.SelectedNav == "Calendar"?style:"")>
 <head>
     <!-- inside <head> -->
     <meta charset="utf-8">

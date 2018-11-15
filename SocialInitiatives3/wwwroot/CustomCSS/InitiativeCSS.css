@@ -1,9 +1,143 @@
-﻿#leftVid {
+﻿@media only screen and (max-width: 600px) {
+    .image {
+        height: 14vh;
+    }
+
+    .Heading {
+        font-size: 3rem;
+        text-align: center;
+    }
+    .subheading {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 0.8rem;
+    }
+    iframe{
+        width:50vw;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .image {
+        height: 14vh;
+    }
+
+    .Heading {
+        font-size: 3rem;
+        text-align: center;
+    }
+    .subheading {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 0.8rem;
+    }
+    iframe {
+        width: 50vw;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+    .image {
+        height: 14vh;
+    }
+
+    .Heading {
+        font-size: 3rem;
+        text-align: center;
+    }
+    .subheading {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 0.8rem;
+    }
+    iframe {
+        width: 50vw;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+    .image {
+        height: 40vh;
+    }
+
+    .Heading {
+        font-size: 4.5rem;
+    }
+    .subheading {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 1.5rem;
+    }
+    iframe {
+        width: 50vw;
+        height: 40vh;
+    }
+    .ta {
+        height: 236px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .image {
+        height: 40vh;
+    }
+
+    .Heading {
+        font-size: 4.5rem;
+    }
+    .subheading {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .lead {
+        font-size: 1.5rem;
+    }
+    iframe {
+        width: 50vw;
+        height:40vh;
+    }
+    .ta{
+        height:236px;
+    }
+}
+
+#leftVid {
     margin-left:2vw;
+
     width: 30vw;
 }
 
 #rightVid {
     margin-right:2vw;
     width: 30vw;
+}
+
+iframe{
+    padding-left:2vw;
+    padding-right:2vw;
+}
+
+.ta {
+    border-style: solid;
+    border-color: Black;
+    border-width: 2px;
 }
