@@ -1,0 +1,127 @@
+﻿<div style="background-color: @ViewBag.Color">
+    <h2 class="display-1 text-center Desktop" style="color:white">@ViewBag.Title</h2>
+    <h2 class="display-4 text-center Mobile" style="color:white">@ViewBag.Title</h2>
+
+    <div class="container-fluid">
+
+        @{
+            int count = ViewBag.NGOss.Count;
+        }
+        <table class="mx-auto">
+            @for (int i = 0; i < count;)
+            {
+
+                <tr>
+                    <td>
+                        @if (i < count)
+                        {
+                            <div class="card">
+                                <div class="row no-gutters">
+                                    <div class="col-auto">
+
+                                        <img src="@ViewBag.NGOs[i].filepath" class="img-fluid" alt="" style="width:10vw;">
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-block px-2">
+                                            <h4 class="card-title"><lead>@ViewBag.NGOs[i].NgoName</lead></h4>
+                                            <p class="card-text">
+                                                <b>What do we do:</b><br />
+                                                @ViewBag.NGOs[i].work <br />
+                                                <b>Who do we work with: </b><br />
+                                                @ViewBag.NGOs[i].team<br />
+                                                <b>Where do we work:</b><br />
+                                                @ViewBag.NGOs[i].NgoAddress<br />
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer w-100 text-muted">
+                                    <p>
+                                        Contact Info:<br />
+                                        @if (ViewBag.NGOs[i].phoneNumber != null)
+                                        {
+                                            string j = "Phone Number:" + ViewBag.NGOs[i].phoneNumber;
+                                            @j;
+                                            <br />
+                                        }
+                                        @if (ViewBag.NGOs[i].instagramLink != null)
+                                        {
+                                            string j = "Instagram: " + ViewBag.NGOs[i].instagramLink;
+                                            @j;
+                                            <br />
+                                        }
+                                        @if (ViewBag.NGOs[i].websiteLink != null)
+                                        {
+                                            string j = "Website: " + ViewBag.NGOs[i].websiteLink;
+                                            @j;
+                                            <br />
+                                        }
+                                    </p>
+
+                                </div>
+                            </div>
+
+                        }
+                    </td>
+                    <td>
+
+                        @if ((i + 1) < count)
+                        {
+                        <div class="card">
+                            <div class="row no-gutters">
+                                <div class="col-auto">
+
+                                    <img src="@ViewBag.NGOs[++i].filepath" class="img-fluid" alt="" style="width:10vw;">
+                                </div>
+                                <div class="col">
+                                    <div class="card-block px-2">
+                                        <h4 class="card-title"><lead>@ViewBag.NGOs[i].NgoName</lead></h4>
+                                        <p class="card-text">
+                                            <b>What do we do:</b><br />
+                                            @ViewBag.NGOs[i].work <br />
+                                            <b>Who do we work with: </b><br />
+                                            @ViewBag.NGOs[i].team<br />
+                                            <b>Where do we work:</b><br />
+                                            @ViewBag.NGOs[i].NgoAddress<br />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer w-100 text-muted">
+                                <p>
+                                    Contact Info:<br />
+                                    @if (ViewBag.NGOs[i].phoneNumber != null)
+                                    {
+                                        string j = "Phone Number:" + ViewBag.NGOs[i].phoneNumber;
+                                        @j;
+                                        <br />
+                                    }
+                                    @if (ViewBag.NGOs[i].instagramLink != null)
+                                    {
+                                        string j = "Instagram: " + ViewBag.NGOs[i].instagramLink;
+                                        @j;
+                                        <br />
+                                    }
+                                    @if (ViewBag.NGOs[i].websiteLink != null)
+                                    {
+                                        string j = "Website: " + ViewBag.NGOs[i].websiteLink;
+                                        @j;
+                                        <br />
+                                    }
+                                </p>
+
+                            </div>
+                        </div>
+                        }
+
+                    </td>
+                </tr>
+                i++;
+
+            }
+        </table>
+
+    </div>
+
+</div>

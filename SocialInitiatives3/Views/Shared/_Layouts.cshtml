@@ -39,9 +39,9 @@
     <div class="container-fluid" style="padding-left:0; padding-right:0; @(ViewBag.SelectedNav == "Home" ? "background: rgba(0, 0, 0, 0.65);" : "") ">
         <nav class="navbar navbar-expand-lg @(ViewBag.SelectedNav == "Home" ? "bg-transparent navbar-dark" : "bg-dark navbar-dark") " id="nav1">
             <a class="navbar-brand" href="@Url.Action("Home", "Index")">
-            
-                    <img src="~/Images/NavBar/0.png" style="width:auto;height:50px;" />
-                
+
+                <img src="~/Images/NavBar/0.png" style="width:auto;height:50px;" />
+
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -117,7 +117,7 @@
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            <button type="button" class="btn" onclick="location.href='@Url.Action("RegisterV", "Account")'" >Register</button>
+                            <button type="button" class="btn" onclick="location.href='@Url.Action("RegisterV", "Account")'">Register</button>
                         </li>
                     }
                 </ul>
@@ -132,8 +132,8 @@
                     <div class="modal-header" style="background-color:#f44336;color :white;">
                         <h5 class="modal-title mx-auto text-center lead font-weight-bold" style="font-size:1.5rem;" id="loginModalLabel">Login</h5>
                         @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" style="color:white">&times;</span>
-                        </button>*@
+                                <span aria-hidden="true" style="color:white">&times;</span>
+                            </button>*@
                     </div>
                     <div class="modal-body">
                         <input type="hidden" asp-for="ReturnUrl" />
@@ -146,60 +146,60 @@
                             <input type="password" class="form-control" asp-for="Password" placeholder="Password">
                         </div>
                         <div>
-                            <p class="lead"  style="font-size:1.5rem;">Not registered yet? <a href="@Url.Action("RegisterV","Account")" >Register here!</a></p>
+                            <p class="lead" style="font-size:1.5rem;">Not registered yet? <a href="@Url.Action("RegisterV","Account")">Register here!</a></p>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary lead" data-dismiss="modal"  style="font-size:1.5rem;">Close</button>
-                        <button type="submit" class="btn btn-primary lead"  style="font-size:1.5rem;">Login</button>
+                        <button type="button" class="btn btn-secondary lead" data-dismiss="modal" style="font-size:1.5rem;">Close</button>
+                        <button type="submit" class="btn btn-primary lead" style="font-size:1.5rem;">Login</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div style="overflow-x:hidden;@(ViewBag.SelectedNav == "Home" ? "z-index:-1;position:absolute; top:0":"")" >
-        
-        @RenderBody()
-        
+    <div style="overflow-x:hidden;@(ViewBag.SelectedNav == "Home" ? "z-index:-1;position:absolute; top:0":"")">
 
-        
+        @RenderBody()
+
+
+
         @if (ViewBag.SelectedNav == "Calendar")
         {
 
             @RenderSection("Scripts", false)
         }
-       
-        <div style="padding-top:3vh;">
+
+        <div style="@(ViewBag.Page=="Category"?"":"padding-top:3vh;")">
             <div class="row bg-dark" style="padding-top:3vh;padding-bottom:3vh;">
-            <table class="mx-auto">
-                <tr class="Desktop">
-                    <td >
-                        <img src="~/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;"  />
-                    </td>
-                    <td >
-                         <img src="~/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;"  />
-                    </td>
-                    <td class="lead align-middle" style="color:white; padding-left:2vw;">
-                        ©2018 by TSRS Social Initiatives.
-                    </td>
-                </tr>
-                <tr class="Mobile">
-                    <td class="float-left">
-                        <img src="/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;">
-                    </td>
-                    <td class="float-right">
-                        <img src="/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;">
-                    </td>
-                </tr>
-                <tr class="Mobile">
-                    <td class="align-middle text-center text-white lead" style="font-size" colspan="2">
-                        ©2018 by TSRS Social Initiatives.
-                    </td>
-                    
-                </tr>
-            </table>
+                <table class="mx-auto">
+                    <tr class="Desktop">
+                        <td>
+                            <img src="~/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;" />
+                        </td>
+                        <td>
+                            <img src="~/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;" />
+                        </td>
+                        <td class="lead align-middle" style="color:white; padding-left:2vw;">
+                            ©2018 by TSRS Social Initiatives.
+                        </td>
+                    </tr>
+                    <tr class="Mobile">
+                        <td class="float-left">
+                            <img src="/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;">
+                        </td>
+                        <td class="float-right">
+                            <img src="/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;">
+                        </td>
+                    </tr>
+                    <tr class="Mobile">
+                        <td class="align-middle text-center text-white lead" style="font-size" colspan="2">
+                            ©2018 by TSRS Social Initiatives.
+                        </td>
+
+                    </tr>
+                </table>
             </div>
-             <div class="row bg-dark" >
+            <div class="row bg-dark">
                 <table class="lead mx-auto" style="color:white">
                     <tr>
                         <th class="align-middle Desktop" style="padding-right:8vw;">
@@ -217,14 +217,26 @@
                             Example@email.com
                         </td>
                         <td class="align-middle">
-                            The Shri Ram School, Moulsari,<br/> DLF phase 3, Moulsari avenue
+                            The Shri Ram School, Moulsari,<br /> DLF phase 3, Moulsari avenue
                         </td>
                     </tr>
                 </table>
             </div>
-           
+
         </div>
     </div>
+    @{
+            string message =(string) TempData["Message"];
+            if (message != null)
+            {
+            <div class="alert alert-warning alert-dismissible fade show mx-auto" style="position:absolute;bottom:0px;" role="alert">
+                <strong>@message</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+    }
 
 </body>
 </html>

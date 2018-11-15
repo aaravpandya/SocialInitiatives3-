@@ -61,10 +61,13 @@ namespace SocialInitiatives3.Controllers
             {
                 //    var root = he.WebRootPath;
                 //    root = root + "\\SubmittedInitiativeImg";
-                //same file name problems
-                var filename = Path.Combine(he.WebRootPath, Path.GetFileName(uploadedImage.FileName));
-                uploadedImage.CopyTo(new FileStream(filename+Guid.NewGuid().ToString(), FileMode.Create));
-                initiative.filepath = "/" + Path.GetFileName(uploadedImage.FileName);
+                ////same file name problems
+                //var filename = Path.Combine(he.WebRootPath, Path.GetFileName(uploadedImage.FileName));
+                var name = Guid.NewGuid().ToString() + Path.GetFileName(uploadedImage.FileName);
+                var filename = Path.Combine(he.WebRootPath, name);
+
+                uploadedImage.CopyTo(new FileStream(filename, FileMode.Create));
+                initiative.filepath = "/" + name;
             }
             initiative.UserId = _usermgr.GetUserId(HttpContext.User);
             initiative.User = _dbContext.AppUsers.Find(_usermgr.GetUserId(HttpContext.User));
@@ -96,13 +99,15 @@ namespace SocialInitiatives3.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                TempData["Message"] = "An error was encountered. Please try again.";
+                return RedirectToAction("Home", "Index");
             }
             int i = 0;
             var success = Int32.TryParse(id, out i);
             if (!success)
             {
-                return RedirectToAction("Index", "Calendar");
+                TempData["Message"] = "An error was encountered. Please try again.";
+                return RedirectToAction("Home", "Index");
             }
             ViewBag.SelectedNav = "Initiatives";
             ViewBag.Title = CategoryDict.Categories[i];
@@ -119,7 +124,7 @@ namespace SocialInitiatives3.Controllers
                 }
             }
             ViewBag.uvlist = uvli;
-            
+            ViewBag.Page = "Category";
             return View();
         }
         [Authorize]

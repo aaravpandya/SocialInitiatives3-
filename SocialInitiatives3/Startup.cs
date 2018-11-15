@@ -33,10 +33,12 @@ namespace SocialInitiatives3
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+                
             })
                                         .AddEntityFrameworkStores<AppDbContext>()
                                         .AddDefaultTokenProviders();
-            services.AddMvc();
+            services.AddMvc().AddSessionStateTempDataProvider();
             services.AddMemoryCache();
             services.AddSession();
             services.AddAutoMapper();

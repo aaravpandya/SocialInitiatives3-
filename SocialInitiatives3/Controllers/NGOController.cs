@@ -28,7 +28,7 @@ namespace SocialInitiatives3.Controllers
         }
 
         [Route("[controller]/[action]/{id?}")]
-        public IActionResult Category(string id)
+        public IActionResult Categories(string id)
         {
             if (!ModelState.IsValid)
             {
@@ -38,13 +38,16 @@ namespace SocialInitiatives3.Controllers
             var success = Int32.TryParse(id, out i);
             if (!success)
             {
-                return RedirectToAction("Index", "Calendar");
+                TempData["Message"] = "An error was encountered. Please try again.";
+                return RedirectToAction("Home", "Index");
             }
             //RegisterModel rm = new RegisterModel();
             //rm.initiatives = _dbContext.initiatives.Where(j => j.categoryId == i);
             ViewBag.SelectedNav = "Initiatives";
             ViewBag.Title = CategoryDict.Categories[i];
+            ViewBag.NGOs = _dbContext.nGOs.Where(t => t.categoryId == i).ToList();
             return View();
         }
+
     }
 }

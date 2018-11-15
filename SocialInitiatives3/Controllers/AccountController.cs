@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
+using SendGrid.Helpers.Mail;
+using SocialInitiatives3.Infrastructure;
 using SocialInitiatives3.Models;
 using SocialInitiatives3.Models.ViewModels;
 
@@ -66,10 +71,27 @@ namespace SocialInitiatives3.Controllers
                 //create the roles and seed them to the database 
                 roleResult = await _rolmgr.CreateAsync(new IdentityRole("User"));
             }
-            await userManager.AddToRoleAsync(await userManager.FindByEmailAsync(user.Email), "User");
+            user = await userManager.FindByEmailAsync(user.Email);
+            await userManager.AddToRoleAsync(user, "User");
+            var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code =code}, protocol: HttpContext.Request.Scheme);
+            var client = new SendGridClient(SendGridDetails.APIKEY);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("admin@tsrssocialinitiatives.com", "TSRS Social Initiatives"),
+                Subject = "EmailConfirmation",
+                HtmlContent = $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>.",
+            };
+            msg.AddTo(new EmailAddress(user.Email));
+
+            // Disable click tracking.
+            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+            msg.SetClickTracking(false, false);
+            await client.SendEmailAsync(msg);
+            TempData["Message"] = "Successfully Registered. Confirm your email before sign in.";
             //await AppIdentityDbContext.AppUsers.AddAsync(user);
             //await AppIdentityDbContext.SaveChangesAsync();
-            return Redirect(registerModel?.ReturnUrl ?? "/Index/Home");
+            return Redirect("/Index/Home");
         }
 
         public async Task<IActionResult> Login (LoginModel login)
@@ -79,6 +101,11 @@ namespace SocialInitiatives3.Controllers
                 return BadRequest(ModelState);
             }
             var user = await userManager.FindByEmailAsync(login.Email);
+            if(!(await userManager.IsEmailConfirmedAsync(user)))
+            {
+                TempData["Message"] = "Confirm your email before sign in";
+                return Redirect("/Index/Home");
+            }
             if(user != null)
             {
                 await signInManager.SignOutAsync();
@@ -145,6 +172,83 @@ namespace SocialInitiatives3.Controllers
                 return RedirectToAction("Index", "UserAccount");
             return BadRequest(ModelState);
 
+        }
+        public async Task<IActionResult> ConfirmEmailAsync(string userid, string code)
+        {
+            AppUser user = await userManager.FindByIdAsync(userid);
+            IdentityResult result = await userManager.
+                        ConfirmEmailAsync(user, code);
+            
+            if (result.Succeeded)
+            {
+                TempData["Message"] = "Email confirmed successfully!";
+                return RedirectToAction("Home", "Index");
+            }
+            else
+            {
+                TempData["Message"] = "Error while confirming your email!";
+                return View("Error");
+            }
+        }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ResetPasswordVAsync(PasswordResetViewModel vm)
+        {
+            AppUser user = await userManager.FindByEmailAsync(vm.email);
+            var code = await userManager.GeneratePasswordResetTokenAsync(user);
+            var callbackUrl = Url.Action("Reset", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            var client = new SendGridClient(SendGridDetails.APIKEY);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("admin@tsrssocialinitiatives.com", "TSRS Social Initiatives"),
+                Subject = "Password Recovery",
+                HtmlContent = $"Change your password by <a href='{callbackUrl}'>clicking here</a>.",
+            };
+            msg.AddTo(new EmailAddress(user.Email));
+
+            // Disable click tracking.
+            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
+            msg.SetClickTracking(false, false);
+            await client.SendEmailAsync(msg);
+            TempData["Message"] = "Check your inbox for password reset link";
+            return RedirectToAction("Home", "Index");
+        }
+
+        public IActionResult Reset(string userId, string code)
+        {
+            ViewBag.userId = userId;
+            ViewBag.code = code;
+            return View();
+        }
+
+        public async Task<IActionResult> ResetPasswordTokenAsync(PasswordResetViewModel viewModel)
+        {
+            if(viewModel.password == viewModel.Confirmpassword)
+            {
+            }
+            else
+            {
+                ViewBag.userId = viewModel.userId;
+                ViewBag.code = viewModel.code;
+                TempData["Message"] = "Passwords do not match";
+                return RedirectToAction("Reset", "Account");
+            }
+            AppUser user = await userManager.FindByIdAsync(viewModel.userId);
+            IdentityResult result = await userManager.ResetPasswordAsync(user, viewModel.code, viewModel.password);
+            if(result.Succeeded)
+            {
+                TempData["Message"] = "Password changed.";
+                return RedirectToAction("Home", "Index");
+            }
+            else
+            {
+                TempData["Message"] = "Password not changed. Try again.";
+                return RedirectToAction("Home", "Index");
+            }
         }
     }
 

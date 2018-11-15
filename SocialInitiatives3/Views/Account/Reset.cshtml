@@ -1,0 +1,22 @@
+﻿@model PasswordResetViewModel
+@{
+    ViewData["Title"] = "ResetPassword";
+    Layout = "_Layouts";
+}
+
+<div class="col-6 mx-auto" style="padding-top:5vh;padding-bottom:5vh;">
+    <form asp-action="ResetPasswordTokenAsync" asp-controller="Account" method="post">
+        <input type="hidden" asp-for="userId" value="@ViewBag.userId" />
+        <input type="hidden" asp-for="code" value="@ViewBag.code" />
+        <div class="form-group">
+            <label asp-for="password">New Password</label>
+            <input type="password" class="form-control" placeholder="Enter password" asp-for="password" />
+        </div>
+        <div class="form-group">
+            <label asp-for="password">Confirm Password</label>
+            <input type="password" class="form-control" placeholder="Enter password" asp-for="Confirmpassword" />
+        </div>
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+    </form>
+</div>
+
