@@ -34,7 +34,8 @@ namespace SocialInitiatives3.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                TempData["Message"] = "Error";
+                return Redirect("/Index/Home");
             }
             Event e = new Event();
             e.Subject = viewModel.Subject;
@@ -48,7 +49,7 @@ namespace SocialInitiatives3.Controllers
             {
                 e.End = e.Start;
             }
-            e.Description = viewModel.Description;
+            e.Description = System.Net.WebUtility.HtmlEncode("<div>" + viewModel.Description + " < br />Organizer : " + viewModel.Organizer + "< br />OrganizerEmail : " + viewModel.OrganizerEmail + "< br />Start : " + viewModel.Start + "< br /></ div > ");
             e.OrganiserEmail = viewModel.OrganizerEmail;
             e.PhoneNumber = viewModel.PhoneNumber;
             e.ThemeColor = "Green";

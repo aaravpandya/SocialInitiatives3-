@@ -168,7 +168,7 @@
                             title: v.subject,
                             description: v.description,
                             start: moment(v.start),
-                            end: v.end != null ? moment(v.end) : null,
+                            end: v.End != null ? moment(v.end) : null,
                             color: v.themeColor,
                             allDay: v.isFullDay
                         });
@@ -236,7 +236,7 @@
                     eventRender: function (calEvent, $el) {
                         $el.popover({
                             title: calEvent.title,
-                            content: "Hello" + calEvent.start,
+                            content: "<div><b>Example popover</b> - content</div>",
                             start: calEvent.start,
                             end: calEvent.end,
                             trigger: "hover",

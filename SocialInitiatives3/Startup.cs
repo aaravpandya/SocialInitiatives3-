@@ -33,6 +33,9 @@ namespace SocialInitiatives3
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
                 options.SignIn.RequireConfirmedEmail = true;
                 
             })
@@ -44,24 +47,7 @@ namespace SocialInitiatives3
             services.AddAutoMapper();
             
         }
-        private async Task CreateUserRoles(IServiceProvider serviceProvider)
-        {
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var UserManager = serviceProvider.GetRequiredService<UserManager<AppUser>>();
-            
-            //Adding Admin Role 
-            var roleCheck = await RoleManager.RoleExistsAsync("Admin");
-            if (!roleCheck)
-            {
-                //create the roles and seed them to the database 
-                await RoleManager.CreateAsync(new IdentityRole("Admin"));
-            }
-            //Assign Admin role to the main User here we have given our newly registered  
-            //login id for Admin management 
-            
-            AppUser user = await UserManager.FindByEmailAsync("pandya.aarav.97@gmail.com");
-            await UserManager.AddToRoleAsync(user, "Admin");
-        }
+     
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider services)
@@ -80,7 +66,6 @@ namespace SocialInitiatives3
             app.UseSession();
             app.UseAuthentication();
             app.UseMvc();
-            CreateUserRoles(services).Wait();
         }
     }
 }

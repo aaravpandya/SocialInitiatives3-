@@ -96,7 +96,10 @@ namespace SocialInitiatives3.Controllers
         {
             AppUser user = await _usrmgr.FindByEmailAsync(e);
             if (user == null)
-                return BadRequest(ModelState);
+            {
+                TempData["Message"] = "Error";
+                return Redirect("/Index/Home");
+            }
             List<AppUser> i = _dbContext.AppUsers.Where(u => u.Email == user.Email).Include(u => u.user_initiatives_created).Include(u => u.UserVolunteers).Include(u => u.user_events).ToList();
             var t = i.Select(item => item.user_initiatives_created).ToList();
             List<Initiative> uvli = new List<Initiative>();

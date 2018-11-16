@@ -41,8 +41,8 @@ namespace SocialInitiatives3.Controllers
             ViewBag.SelectedNav = "Register";
             return View();
         }
-       
-        public async Task<IActionResult> Register (RegisterModel registerModel)
+
+        public async Task<IActionResult> Register(RegisterModel registerModel)
         {
             //Regex.Match(registerModel.PhoneNumber, @"/[2-9]{2}\d{8}/")
             if (!ModelState.IsValid)
@@ -58,11 +58,15 @@ namespace SocialInitiatives3.Controllers
             }
             else
             {
-                return BadRequest();
+                TempData["Message"] = "Invalid phone number or admission number. Please try again with correct details.";
+                return RedirectToAction("Home", "Index");
             }
             IdentityResult result = await userManager.CreateAsync(user, registerModel.Password);
             if (!result.Succeeded)
-                return new BadRequestObjectResult(result.Errors);
+            { 
+                TempData["Message"] = "Error in creating user. Please try again.";
+                return RedirectToAction("Home", "Index");
+            }
 
             IdentityResult roleResult;
             var roleCheck = await _rolmgr.RoleExistsAsync("User");
@@ -72,6 +76,17 @@ namespace SocialInitiatives3.Controllers
                 roleResult = await _rolmgr.CreateAsync(new IdentityRole("User"));
             }
             user = await userManager.FindByEmailAsync(user.Email);
+            roleCheck = await _rolmgr.RoleExistsAsync("Admin");
+            if (!roleCheck)
+            {
+                //create the roles and seed them to the database 
+                await _rolmgr.CreateAsync(new IdentityRole("Admin"));
+            }
+            //Assign Admin role to the main User here we have given our newly registered  
+            //login id for Admin management 
+
+            if(Emails.emails.Contains(user.Email.ToString()))
+                await userManager.AddToRoleAsync(user, "Admin");
             await userManager.AddToRoleAsync(user, "User");
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code =code}, protocol: HttpContext.Request.Scheme);
@@ -98,7 +113,8 @@ namespace SocialInitiatives3.Controllers
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                TempData["Message"] = "Error. Please try again.";
+                return RedirectToAction("Home", "Index");
             }
             var user = await userManager.FindByEmailAsync(login.Email);
             if(!(await userManager.IsEmailConfirmedAsync(user)))
@@ -114,14 +130,16 @@ namespace SocialInitiatives3.Controllers
                     return Redirect(login?.ReturnUrl ?? "/Index/Home");
                 }
             }
-            ModelState.AddModelError("", "Invalid name or password");
-            return BadRequest(ModelState);
+            
+            TempData["Message"] = "Invalid name or password";
+            return Redirect("/Index/Home");
         }
         public async Task<IActionResult> LogOut ()
         {
             if(!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                TempData["Message"] = "Error";
+                return Redirect("/Index/Home");
             }
             await signInManager.SignOutAsync();
             return RedirectToAction("Home", "Index");
@@ -136,15 +154,20 @@ namespace SocialInitiatives3.Controllers
         {
             if(!(model.newPassword == model.confirmPassword))
             {
-                ModelState.AddModelError("passwordMismatch", "New password and confirm password do match");
-                return BadRequest(ModelState);
+                
+                TempData["Message"] = "New password and confirm password do match";
+                return Redirect("/Index/Home");
             }
             AppUser user = await userManager.GetUserAsync(HttpContext.User);
             IdentityResult result = await userManager.ChangePasswordAsync(user, model.currentPasword, model.newPassword);
             if(result.Succeeded)
                 if((await userManager.UpdateAsync(user)).Succeeded)
+                {
+                    TempData["Message"] = "Password changed";
                     return RedirectToAction("Index", "UserAccount");
-            return BadRequest(ModelState);
+                }
+            TempData["Message"] = "Error";
+            return Redirect("/Index/Home");
         }
         public async Task<IActionResult> EditAsync()
         {
@@ -170,7 +193,8 @@ namespace SocialInitiatives3.Controllers
             user.House = model.House;
             if ((await userManager.UpdateAsync(user)).Succeeded)
                 return RedirectToAction("Index", "UserAccount");
-            return BadRequest(ModelState);
+            TempData["Message"] = "Error";
+            return Redirect("/Index/Home");
 
         }
         public async Task<IActionResult> ConfirmEmailAsync(string userid, string code)

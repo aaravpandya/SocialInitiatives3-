@@ -32,7 +32,8 @@ namespace SocialInitiatives3.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                TempData["Message"] = "Error";
+                return Redirect("/Index/Home");
             }
             int i = 0;
             var success = Int32.TryParse(id, out i);
