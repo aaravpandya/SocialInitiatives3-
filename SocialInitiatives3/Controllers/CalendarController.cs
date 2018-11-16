@@ -49,7 +49,7 @@ namespace SocialInitiatives3.Controllers
             {
                 e.End = e.Start;
             }
-            e.Description = System.Net.WebUtility.HtmlEncode("<div>" + viewModel.Description + " < br />Organizer : " + viewModel.Organizer + "< br />OrganizerEmail : " + viewModel.OrganizerEmail + "< br />Start : " + viewModel.Start + "< br /></ div > ");
+            e.Description = "<div>" + viewModel.Description + " <br>Organizer : " + viewModel.Organizer + "<br>OrganizerEmail : " + viewModel.OrganizerEmail+ "<br>Organizer Phone Number : "+ viewModel.PhoneNumber + "<br>Start time and date : " + e.Start + "<br></div > ";
             e.OrganiserEmail = viewModel.OrganizerEmail;
             e.PhoneNumber = viewModel.PhoneNumber;
             e.ThemeColor = "Green";

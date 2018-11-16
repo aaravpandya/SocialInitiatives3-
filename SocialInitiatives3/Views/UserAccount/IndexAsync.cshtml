@@ -1,9 +1,8 @@
-﻿<style>
+﻿<link href="~/CustomCSS/StyleSheet.css" rel="stylesheet" />
 
-    ul.nav-pills {
-        padding-top: 5vh;
-        position: fixed;
-    }
+<style>
+
+    
     .nav-link{
         color: #f44336;
     }
@@ -20,7 +19,8 @@
         
         <nav class="col-sm-3 col-4" id="myScrollspy" style="border-right-style:solid;">
             <ul class="nav nav-pills flex-column">
-                <p class="display-4 mx-auto"> Menu </p>
+                <p class="display-4 mx-auto Desktop"> Menu </p>
+                <p class="lead mx-auto Mobile" style="font-size:2rem;"><b>Menu</b></p>
                 <li class="nav-item">
                     <a class="nav-link active" href="#section1">Initiatives You Have Volunteered In</a>
                 </li>
@@ -41,8 +41,9 @@
         </nav>
         <div class="col-sm-9 col-8">
             <div id="section1" style="padding-bottom:3vh;">
-                <h1 class="display-4 mx-auto text-center" >Initiatives you have volunteered in</h1>
-                @if(ViewBag.uvlist.Count == 0)
+                <h1 class="display-4 mx-auto text-center Desktop">Initiatives you have volunteered in</h1>
+                <h1 class="lead mx-auto text-center Mobile" style="font-size:2rem;">Initiatives you have volunteered in</h1>
+                @if (ViewBag.uvlist.Count == 0)
                 {
                     <p class="lead text-center" style="padding-top:3vh;">You havent volunteered in any Initiative. Visit the Initiatives page to volunteer now.</p>
                 }
@@ -102,11 +103,12 @@
             </div>
 
             <div id="section2" style="padding-top:3vh; padding-bottom:3vh;">
-                <h1 class="display-4 text-center">Initiatives Added By You</h1>
+                <h1 class="display-4 text-center Desktop">Initiatives Added By You</h1>
+                <h1 class="lead text-center Mobile" style="font-size:2rem;">Initiatives Added By You</h1>
                 @foreach (Initiative t in ViewBag.Initiatives)
                 {
 
-                    
+
                     <div style="padding-top:4vh;">
                         <div class="card mx-auto" style="padding-top:1vh;">
                             <div class="row no-gutters">
@@ -124,208 +126,267 @@
                                             <b>Where do we work:</b><br />
                                             @t.InitiativeAddress<br />
                                         </p>
-                                       </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer w-100 text-muted">
-                                    Contact Info:<br />
-                                    @if (t.phoneNumber != null)
-                                    {
-                                        string j = "Phone Number:" + t.phoneNumber;
-                                        @j;
-                                        <br />
-                                    }
-                                    @if (t.instagramLink != null)
-                                    {
-                                        string j = "Instagram: " + t.instagramLink;
-                                        @j;
-                                        <br />
-                                    }
-                                    @if (t.websiteLink != null)
-                                    {
-                                        string j = "Website: " + t.websiteLink;
-                                        @j;
-                                        <br />
-                                    }
-                                    @if (t.User.Email != null)
-                                    {
-                                        string j = "User Email: " + t.User.Email;
-                                        @j;
-                                        <br />
-                                    }
+                                Contact Info:<br />
+                                @if (t.phoneNumber != null)
+                                {
+                                    string j = "Phone Number:" + t.phoneNumber;
+                                    @j;
+                                    <br />
+                                }
+                                @if (t.instagramLink != null)
+                                {
+                                    string j = "Instagram: " + t.instagramLink;
+                                    @j;
+                                    <br />
+                                }
+                                @if (t.websiteLink != null)
+                                {
+                                    string j = "Website: " + t.websiteLink;
+                                    @j;
+                                    <br />
+                                }
+                                @if (t.User.Email != null)
+                                {
+                                    string j = "User Email: " + t.User.Email;
+                                    @j;
+                                    <br />
+                                }
 
                             </div>
                         </div>
 
-                        </div>
-                        
-                    
+                    </div>
+
+
                 }
             </div>
             <div id="section3" style="padding-top:3vh; padding-bottom:3vh;">
-                <h1 class="display-4 text-center">People volunteering in your Initiative</h1>
+                <h1 class="display-4 text-center Desktop">People volunteering in your Initiative</h1>
+                <h1 class="lead text-center Mobile" style="font-size:2rem;">People volunteering in your Initiative</h1>
                 @{
-        int count = ViewBag.UserVolunteers.Count;
-    }
-     <table style="margin-left:2vw; margin-top:2vh;">
-         @for(int i = 0; i<count; )
-    {
-       
-            <tr>
-                <td>
-                    @if(i<count)
-                    {
-                        <div class="card" style="width: 18rem; margin-left:3vw;">
-        <div class="card-body">
-            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email<br/> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
-            <p class="card-text">
-                <ul>
-                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
-                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
-                    <li>House : @ViewBag.UserVolunteers[i].House</li>
-                </ul>
-                <br />
-                
-            </p>
-        </div>
-    </div>
-
+                    int count = ViewBag.UserVolunteers.Count;
                 }
-                </td>
-                <td>
-                    
-                    @if((i + 1)<count)
+                <table class="Desktop" style="margin-left:2vw; margin-top:2vh;">
+                    @for (int i = 0; i < count;)
                     {
-                    <div class="card" style="width: 18rem; margin-left:3vw;">
-        <div class="card-body">
-            <h5 class="card-title">@ViewBag.UserVolunteers[++i].Name</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email <br/> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
-            <p class="card-text">
-                <ul>
-                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
-                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
-                    <li>House : @ViewBag.UserVolunteers[i].House</li>
-                </ul>
-                <br />
-                
-            </p>
-        </div>
-    </div>
 
+                        <tr>
+                            <td>
+                                @if (i < count)
+                                {
+                                    <div class="card" style="width: 18rem; margin-left:3vw;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email<br /> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
+                                            <p class="card-text">
+                                                <ul>
+                                                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
+                                                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
+                                                    <li>House : @ViewBag.UserVolunteers[i].House</li>
+                                                </ul>
+                                                <br />
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                }
+                            </td>
+                            <td>
+
+                                @if ((i + 1) < count)
+                                {
+                                    <div class="card" style="width: 18rem; margin-left:3vw;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.UserVolunteers[++i].Name</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email <br /> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
+                                            <p class="card-text">
+                                                <ul>
+                                                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
+                                                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
+                                                    <li>House : @ViewBag.UserVolunteers[i].House</li>
+                                                </ul>
+                                                <br />
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+                                }
+
+                            </td>
+                            <td>
+                                @if ((i + 1) < count)
+                                {
+                                    <div class="card" style="width: 18rem; margin-left:3vw;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email <br /> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
+                                            <p class="card-text">
+                                                <ul>
+                                                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
+                                                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
+                                                    <li>House : @ViewBag.UserVolunteers[i].House</li>
+                                                </ul>
+                                                <br />
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                }
+                            </td>
+                            <td>
+                                @if ((i + 1) < count)
+                                {
+                                    <div class="card" style="width: 18rem; margin-left:3vw;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email <br /> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
+                                            <p class="card-text">
+                                                <ul>
+                                                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
+                                                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
+                                                    <li>House : @ViewBag.UserVolunteers[i].House</li>
+                                                </ul>
+                                                <br />
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                }
+                            </td>
+                        </tr>
+                        i++;
 
                     }
-                    
-                </td>
-                <td>
-                    @if((i + 1)<count)
+                </table>
+                <table class="Mobile" style="margin-left:2vw; margin-top:2vh;">
+                    @for (int i = 0; i < count;)
                     {
-                        <div class="card" style="width: 18rem; margin-left:3vw;">
-        <div class="card-body">
-            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email <br/> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
-            <p class="card-text">
-                <ul>
-                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
-                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
-                    <li>House : @ViewBag.UserVolunteers[i].House</li>
-                </ul>
-                <br />
-                
-            </p>
-        </div>
-    </div>
+
+                        <tr>
+                            <td>
+                                @if (i < count)
+                                {
+                                    <div class="card" style="width: 18rem; margin-left:3vw;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email<br /> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
+                                            <p class="card-text">
+                                                <ul>
+                                                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
+                                                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
+                                                    <li>House : @ViewBag.UserVolunteers[i].House</li>
+                                                </ul>
+                                                <br />
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                }
+                            </td>
+                        </tr>
+                        i++;
 
                     }
-                </td>
-                <td>
-                    @if((i + 1)<count)
-                    {
-                        <div class="card" style="width: 18rem; margin-left:3vw;">
-        <div class="card-body">
-            <h5 class="card-title">@ViewBag.UserVolunteers[i].Name</h5>
-            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.UserVolunteers[i].Email <br/> @ViewBag.UserVolunteers[i].PhoneNumber</h6>
-            <p class="card-text">
-                <ul>
-                    <li>Class : @ViewBag.UserVolunteers[i]._class</li>
-                    <li>Section : @ViewBag.UserVolunteers[i].Section</li>
-                    <li>House : @ViewBag.UserVolunteers[i].House</li>
-                </ul>
-                <br />
-                
-            </p>
-        </div>
-    </div>
-
-                    }
-                </td>
-            </tr>
-            i++;
-            
-    }
-     </table>
-     </div>
+                </table>
+            </div>
             <div id="section4" style="padding-top:3vh; padding-bottom:3vh;">
-                <h1 class="display-4 mx-auto text-center">Events Added By You</h1>
-               @{
-      count = ViewBag.Events.Count;
-    }
-     <table class="mx-auto">
-         @for(int i = 0; i<count; )
-    {
-       
-            <tr>
-                <td>
-                    @if(i<count)
-                    {<div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">@ViewBag.Events[i].Subject</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
-                            <p class="card-text">@ViewBag.Events[i].Description</p>
-                        </div>
-                    </div>
+                <h1 class="display-4 mx-auto text-center Desktop">Events Added By You</h1>
+                <h1 class="lead mx-auto text-center Mobile" style="font-size:2rem;">Events Added By You</h1>
+                @{
+                    count = ViewBag.Events.Count;
                 }
-                </td>
-                <td>
-                    
-                    @if((i + 1)<count)
+                <table class="mx-auto Desktop">
+                    @for (int i = 0; i < count;)
                     {
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
-                                <p class="card-text">@ViewBag.Events[i].Description</p>
-                            </div>
-                        </div>
+
+                        <tr>
+                            <td>
+                                @if (i < count)
+                                {<div class="card" >
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.Events[i].Subject</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br /> @ViewBag.Events[i].OrganiserEmail <br /> @ViewBag.Events[i].PhoneNumber</h6>
+                                            <p class="card-text">@ViewBag.Events[i].Description</p>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                            <td>
+
+                                @if ((i + 1) < count)
+                                {
+                                    <div class="card" >
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br /> @ViewBag.Events[i].OrganiserEmail <br /> @ViewBag.Events[i].PhoneNumber</h6>
+                                            <p class="card-text">@ViewBag.Events[i].Description</p>
+                                        </div>
+                                    </div>
+                                }
+
+                            </td>
+                            <td>
+                                @if ((i + 1) < count)
+                                {
+                                    <div class="card" >
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br /> @ViewBag.Events[i].OrganiserEmail <br /> @ViewBag.Events[i].PhoneNumber</h6>
+                                            <p class="card-text">@ViewBag.Events[i].Description</p>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                        i++;
+
                     }
-                    
-                </td>
-                <td>
-                    @if((i + 1)<count)
+                </table>
+                <table class="mx-auto Mobile">
+                    @for (int i = 0; i < count;)
                     {
-<div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
-                            <p class="card-text">@ViewBag.Events[i].Description</p>
-                        </div>
-                    </div>
+
+                        <tr>
+                            <td>
+                                @if (i < count)
+                                {<div class="card" >
+                                        <div class="card-body">
+                                            <h5 class="card-title">@ViewBag.Events[i].Subject</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br /> @ViewBag.Events[i].OrganiserEmail <br /> @ViewBag.Events[i].PhoneNumber</h6>
+                                            <p class="card-text">@ViewBag.Events[i].Description</p>
+                                        </div>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                        i++;
+
                     }
-                </td>
-            </tr>
-            i++;
-            
-    }
-     </table>
-    
+                </table>
             </div>
             
             <div id="section5" style="padding-top:3vh; padding-bottom:3vh;">
-                <h1 class="display-4 mx-auto text-center">Account Settings</h1>
-                <div class="row">
+                <h1 class="display-4 mx-auto text-center Desktop">Account Settings</h1>
+                <h1 class="lead mx-auto text-center Mobile" style="font-size:2rem;">Account Settings</h1>
+                <div class="row Desktop">
                     <div class="ml-auto" style="padding-right:1.5vw;"><button class="btn" onclick="location.href='@Url.Action("ChangePasswordV", "Account")'">Change Password</button></div>
                     <div class="mr-auto" style="padding-left:1.5vw"><button class="btn" onclick="location.href='@Url.Action("EditAsync", "Account")'">Edit Account Information</button></div>
                 </div>
+                <div class="Mobile">
+                    <div  style="padding-left:1.5vw;"><button class="btn" onclick="location.href='@Url.Action("ChangePasswordV", "Account")'">Change Password</button> <br /></div>
+                </div>
+                <div class="Mobile mx-auto" style="padding-left:1.5vw; padding-top:2vh;"><button class="btn" onclick="location.href='@Url.Action("EditAsync", "Account")'">Edit Account Information</button></div>
+                
             </div>
         </div>
     </div>

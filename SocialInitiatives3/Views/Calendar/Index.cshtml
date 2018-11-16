@@ -235,8 +235,9 @@
                     //    });
                     eventRender: function (calEvent, $el) {
                         $el.popover({
+                            html: true,
                             title: calEvent.title,
-                            content: "<div><b>Example popover</b> - content</div>",
+                            content: calEvent.description,
                             start: calEvent.start,
                             end: calEvent.end,
                             trigger: "hover",
@@ -249,5 +250,3 @@
         })
     </script>
 }
-    </div>
-</div>

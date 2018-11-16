@@ -3,7 +3,7 @@
     string style = "style=overflow-x:hidden";
 }
 <!DOCTYPE html>
-<html @(ViewBag.SelectedNav == "Calendar"?style:"")>
+<html @(ViewBag.SelectedNav == "Calendar" ? style : "")>
 <head>
     <!-- inside <head> -->
     <title>TSRS Social Initiatives</title>
@@ -149,6 +149,9 @@
                         <div>
                             <p class="lead" style="font-size:1.5rem;">Not registered yet? <a href="@Url.Action("RegisterV","Account")">Register here!</a></p>
                         </div>
+                        <div>
+                            <p class="lead" style="font-size:1.5rem;"><a href="@Url.Action("ResetPassword","Account")">Forgot Password?</a></p>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary lead" data-dismiss="modal" style="font-size:1.5rem;">Close</button>
@@ -185,20 +188,20 @@
                         </td>
                     </tr>
                     <tr class="Mobile">
-                        <td class="float-left">
+                        <td class="float-right">
                             <img src="/Images/NavBar/1.png" style="width:auto; height:125px;padding-left:2vw;">
                         </td>
-                        <td class="float-right">
+                        <td class="float-left">
                             <img src="/Images/NavBar/2.png" style="width:auto; height:125px;padding-left:2vw;">
                         </td>
                     </tr>
-                    <tr class="Mobile">
-                        <td class="align-middle text-center text-white lead" style="font-size" colspan="2">
-                            ©2018 by TSRS Social Initiatives.
-                        </td>
 
-                    </tr>
                 </table>
+                <div class="align-middle text-center text-white lead" style="font-size:2rem;" colspan="2">
+                    ©2018 by TSRS Social Initiatives.
+
+
+                </div>
             </div>
             <div class="row bg-dark">
                 <table class="lead mx-auto" style="color:white">
@@ -214,8 +217,15 @@
                         </th>
                     </tr>
                     <tr>
-                        <td class="align-middle" style="padding-right:4vw;">
-                            Example@email.com
+                        <td class="align-middle Desktop" style="padding-right:4vw;">
+                            Dhanwanti.mishra@tsrs.org <br />
+                            chadha.rohan@yahoo.com <br />
+                            taarins13@gmail.com<
+                        </td>
+                        <td class="align-middle Mobile" style="padding-left:4vw;">
+                            Dhanwanti.mishra@tsrs.org <br />
+                            chadha.rohan@yahoo.com <br />
+                            taarins13@gmail.com
                         </td>
                         <td class="align-middle">
                             The Shri Ram School, Moulsari,<br /> DLF phase 3, Moulsari avenue
@@ -227,9 +237,9 @@
         </div>
     </div>
     @{
-            string message =(string) TempData["Message"];
-            if (message != null)
-            {
+        string message = (string)TempData["Message"];
+        if (message != null)
+        {
             <div class="alert alert-warning alert-dismissible fade show mx-auto" style="position:absolute;bottom:0px;" role="alert">
                 <strong>@message</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
