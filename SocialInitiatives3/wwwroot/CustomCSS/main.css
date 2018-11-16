@@ -5,7 +5,7 @@
     }
 
     .Desktop {
-        display: none;
+        display: none !important;
     }
     .lead{
         font-size: 1rem;
@@ -19,7 +19,7 @@
     }
 
     .Desktop {
-        display: none;
+        display: none !important;
     }
     .lead{
         font-size: 1rem;
@@ -33,7 +33,7 @@
     }
 
     .Desktop {
-        display: none;
+        display: none !important;
     }
     .lead{
         font-size: 1rem;
@@ -43,7 +43,7 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .Mobile {
-        display: none;
+        display: none !important;
     }
 
     .Desktop {
@@ -58,7 +58,7 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .Mobile {
-        display: none;
+        display: none !important;
     }
 
     .Desktop {
