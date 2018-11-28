@@ -167,7 +167,7 @@ namespace SocialInitiatives3.Controllers
                     return RedirectToAction("Index", "UserAccount");
                 }
             TempData["Message"] = "Error";
-            return Redirect("/Index/Home");
+            return Redirect("/Index/Home"); 
         }
         public async Task<IActionResult> EditAsync()
         {

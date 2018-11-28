@@ -4,7 +4,7 @@
     }
 
     .Desktop {
-        display: none !important;
+        display: none ;;
     }
     .image{
         height:10vh;
@@ -18,7 +18,7 @@
     }
 
     .Desktop {
-        display: none !important;
+        display: none ;;
     }
     .image {
         height: 10vh;
@@ -32,7 +32,7 @@
     }
 
     .Desktop {
-        display: none !important;
+        display: none ;;
     }
     .image {
         height: 10vh;
@@ -42,7 +42,7 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .Mobile {
-        display: none !important;
+        display: none ;;
     }
 
     .Desktop {
@@ -56,7 +56,7 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .Mobile {
-        display: none !important;
+        display: none ;;
     }
 
     .Desktop {

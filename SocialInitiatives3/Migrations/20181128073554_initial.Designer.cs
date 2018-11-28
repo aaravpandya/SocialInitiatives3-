@@ -11,7 +11,7 @@ using System;
 namespace SocialInitiatives3.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20181115102702_initial")]
+    [Migration("20181128073554_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
