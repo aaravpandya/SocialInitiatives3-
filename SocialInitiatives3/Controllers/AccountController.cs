@@ -27,7 +27,7 @@ namespace SocialInitiatives3.Controllers
         private RoleManager<IdentityRole> _rolmgr;
 
         public AccountController(UserManager<AppUser> userMgr,
-                SignInManager<AppUser> signInMgr, AppDbContext dbContext,IMapper mapper, RoleManager<IdentityRole> roleManager)
+                SignInManager<AppUser> signInMgr, AppDbContext dbContext, IMapper mapper, RoleManager<IdentityRole> roleManager)
         {
             userManager = userMgr;
             signInManager = signInMgr;
@@ -50,7 +50,7 @@ namespace SocialInitiatives3.Controllers
                 return BadRequest(ModelState);
             }
             AppUser user = null;
-            var match = Regex.Match(registerModel.PhoneNumber, @"[2-9]{2}\d{8}");
+            var match = Regex.Match(registerModel.PhoneNumber, @"\d{10}");
             var match2 = Regex.Match(registerModel.AdmissionNumber, @"\d{4}");
             if (match.Success && match2.Success)
             {
@@ -63,7 +63,7 @@ namespace SocialInitiatives3.Controllers
             }
             IdentityResult result = await userManager.CreateAsync(user, registerModel.Password);
             if (!result.Succeeded)
-            { 
+            {
                 TempData["Message"] = "Error in creating user. Please try again.";
                 return RedirectToAction("Home", "Index");
             }
@@ -85,11 +85,12 @@ namespace SocialInitiatives3.Controllers
             //Assign Admin role to the main User here we have given our newly registered  
             //login id for Admin management 
 
-            if(Emails.emails.Contains(user.Email.ToString()))
+            if (Emails.emails.Contains(user.Email.ToString()))
                 await userManager.AddToRoleAsync(user, "Admin");
             await userManager.AddToRoleAsync(user, "User");
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code =code}, protocol: HttpContext.Request.Scheme);
+            var callbackUrl = Url.Action("ConfirmEmailAsync", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            //var callbackUrl = Url.Page("/Account/ConfirmEmail", pageHandler: null,values: new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
             var client = new SendGridClient(SendGridDetails.APIKEY);
             var msg = new SendGridMessage()
             {
@@ -106,6 +107,11 @@ namespace SocialInitiatives3.Controllers
             TempData["Message"] = "Successfully Registered. Confirm your email before sign in.";
             //await AppIdentityDbContext.AppUsers.AddAsync(user);
             //await AppIdentityDbContext.SaveChangesAsync();
+            return Redirect("/Index/Home");
+        }
+
+        public async Task<IActionResult> ResendEmailConfirmation()
+        {
             return Redirect("/Index/Home");
         }
 
