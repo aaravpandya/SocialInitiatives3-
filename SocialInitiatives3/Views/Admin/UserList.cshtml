@@ -9,7 +9,6 @@
      <table style="margin-left:2vw; margin-top:2vh;">
          @for(int i = 0; i<count; )
     {
-       
             <tr>
                 <td>
                     @if(i<count)
@@ -29,7 +28,6 @@
             </p>
         </div>
     </div>
-
                 }
                 </td>
                 <td>
@@ -51,8 +49,6 @@
             </p>
         </div>
     </div>
-
-
                     }
                     
                 </td>
@@ -61,7 +57,7 @@
                     {
                         <div class="card" style="width: 18rem; margin-left:3vw;">
         <div class="card-body">
-            <h5 class="card-title">@ViewBag.list[i].Name</h5>
+            <h5 class="card-title">@ViewBag.list[++i].Name</h5>
             <h6 class="card-subtitle mb-2 text-muted">@ViewBag.list[i].Email <br/> @ViewBag.list[i].PhoneNumber</h6>
             <p class="card-text">
                 <ul>
@@ -82,7 +78,7 @@
                     {
                         <div class="card" style="width: 18rem; margin-left:3vw;">
         <div class="card-body">
-            <h5 class="card-title">@ViewBag.list[i].Name</h5>
+            <h5 class="card-title">@ViewBag.list[++i].Name</h5>
             <h6 class="card-subtitle mb-2 text-muted">@ViewBag.list[i].Email <br/> @ViewBag.list[i].PhoneNumber</h6>
             <p class="card-text">
                 <ul>

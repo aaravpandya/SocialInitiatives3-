@@ -4,10 +4,14 @@
     }
 
     .Desktop {
-        display: none ;;
+        display: none ;
     }
     .image{
         height:10vh;
+    }
+    .card-text {
+        font-size: 1rem;
+        font-weight: 500;
     }
 }
 
@@ -18,10 +22,14 @@
     }
 
     .Desktop {
-        display: none ;;
+        display: none ;
     }
     .image {
         height: 10vh;
+    }
+    .card-text {
+        font-size: 1.5rem;
+        font-weight: 500;
     }
 }
 
@@ -32,17 +40,21 @@
     }
 
     .Desktop {
-        display: none ;;
+        display: none ;
     }
     .image {
         height: 10vh;
+    }
+    .card-text {
+        font-size: 1.75rem;
+        font-weight: 500;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .Mobile {
-        display: none ;;
+        display: none ;
     }
 
     .Desktop {
@@ -50,13 +62,17 @@
     }
     .image {
         height: 20vh;
+    }
+    .card-text {
+        font-size: 1.75rem;
+        font-weight: 500;
     }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .Mobile {
-        display: none ;;
+        display: none ;
     }
 
     .Desktop {
@@ -64,6 +80,11 @@
     }
     .image {
         height: 20vh;
+    }
+
+    .card-text {
+        font-size : 1.75rem;
+        font-weight:500;
     }
 }
 
