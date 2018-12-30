@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Social_Initiatives.Controllers
+namespace SocialInitiatives3.Controllers
 {
-
     [Route("")]
     [Route("[controller]/[action]")]
     public class IndexController : Controller
     {
-
         public IActionResult Home()
         {
             ViewBag.SelectedNav = "Home";

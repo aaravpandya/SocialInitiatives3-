@@ -1,84 +1,75 @@
 ﻿/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .image{
-        height:14vh;
-    }
+    .image { height: 14vh; }
+
     .Heading {
         font-size: 3rem;
         text-align: center;
     }
-    .lead {
-        font-size: 0.8rem;
-    }
+
+    .lead { font-size: 0.8rem; }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
-    .image {
-        height: 14vh;
-    }
+    .image { height: 14vh; }
+
     .Heading {
         font-size: 3rem;
         text-align: center;
     }
-    .lead {
-        font-size: 0.8rem;
-    }
+
+    .lead { font-size: 0.8rem; }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
 
-    .image {
-        height: 14vh;
-    }
+@media only screen and (min-width: 768px) {
+    .image { height: 14vh; }
+
     .Heading {
         font-size: 3rem;
         text-align: center;
     }
-    .lead {
-        font-size: 0.8rem;
-    }
+
+    .lead { font-size: 0.8rem; }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
 
-    .image {
-        height: 40vh;
-    }
-    .Heading {
-        font-size: 4.5rem;
-    }
-    .lead {
-        font-size: 1.5rem;
-    }
+@media only screen and (min-width: 992px) {
+    .image { height: 40vh; }
+
+    .Heading { font-size: 4.5rem; }
+
+    .lead { font-size: 1.5rem; }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
-    .image {
-        height: 40vh;
-    }
-    .Heading {
-        font-size: 4.5rem;
-    }
-    .lead {
-        font-size: 1.5rem;
-    }
+    .image { height: 40vh; }
+
+    .Heading { font-size: 4.5rem; }
+
+    .lead { font-size: 1.5rem; }
 }
+
 .zoom {
+    -ms-transition: transform .2s;
+    -o-transition: transform .2s;
+    -webkit-transition: transform .2s;
     transition: transform .2s;
 }
 
-    .zoom:hover {
-        -ms-transform: scale(1.2); /* IE 9 */
-        -webkit-transform: scale(1.5); /* Safari 3-8 */
-        transform: scale(1.2);
-    }
-
-.solidborder {
-    border-style: solid;
-    border-color: #f44336;
+.zoom:hover {
+    -ms-transform: scale(1.2); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.2);
 }
 
+.solidborder {
+    border-color: #f44336;
+    border-style: solid;
+}

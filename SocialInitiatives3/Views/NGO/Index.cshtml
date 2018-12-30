@@ -1,20 +1,20 @@
-﻿    @{
-        string p = @"style=margin-left:3vw; ";
+﻿@{
+    const string p = @"style=margin-left:3vw; ";
+}
+<link href="~/CustomCSS/init.css" rel="stylesheet"/>
+<div class="row" style="margin-left: 0.5vw; padding-bottom: 18vh; padding-top: 18vh;">
+    @for (var i = 1; i <= 9; i++)
+    {
+        var s = "/Images/Initiatives/" + i + ".png";
+        <div class="col mx-auto">
+            <a href="@Url.Action("Categories", "NGO", new {id = i})">
+                <img class="Desktop" src="@s"/>
+                <img class="Mobile" src="@s" @(i == 1 || i == 4 || i == 7 ? p : "")/>
+                @{
+                    var a = CategoryDict.Categories[i];
+                }
+                <figcaption class="figure-caption font-weight-bold text-center" style="padding-right: 1.5vw;">@a</figcaption>
+            </a>
+        </div>
     }
-    <link href="~/CustomCSS/init.css" rel="stylesheet" />
-    <div class="row" style="padding-top:18vh;padding-bottom:18vh;margin-left:0.5vw;">
-        @for (int i = 1; i <= 9; i++)
-        {
-            string s = "/Images/Initiatives/" + i.ToString() + ".png";
-            <div class="col mx-auto">
-                <a href="@Url.Action("Categories","NGO",new { id = i})">
-                    <img class="Desktop" src="@s" />
-                    <img class="Mobile" src="@s" @((i == 1 || i == 4 || i == 7) ? p : "") />
-                    @{
-                        string a = CategoryDict.Categories[i];
-                    }
-                    <figcaption class="figure-caption font-weight-bold text-center" style="padding-right:1.5vw;">@a</figcaption>
-                </a>
-            </div>
-        }
-    </div>
+</div>

@@ -1,77 +1,79 @@
-﻿
-@{
+﻿@{
     Layout = "_AdminLayout";
 }
-<div style="padding-top:2vw;">
+<div style="padding-top: 2vw;">
     @{
         int count = ViewBag.Events.Count;
     }
-     <table>
-         @for(int i = 0; i<count; )
-    {
-       
+    <table>
+        @for (var i = 0; i < count;)
+        {
             <tr>
-                <td style="padding-right:2vw;">
-                    @if(i<count)
-                    {<div class="card" style="width: 18rem; margin-left:3vw;">
-                        <div class="card-body">
-                            <h5 class="card-title">@ViewBag.Events[i].Subject</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
-                            <p class="card-text">@ViewBag.Events[i].Description</p>
-                            <a href="@Url.Action("EventButton","Admin",new { id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
-                            <a href="@Url.Action("EventButton","Admin",new { id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
-                        </div>
-                    </div>
-                }
-                </td>
-                <td style="padding-right:2vw;">
-                    
-                    @if((i + 1)<count)
+                <td style="padding-right: 2vw;">
+                    @if (i < count)
                     {
-                        <div class="card" style="width: 18rem; margin-left:3vw;">
+                        <div class="card" style="margin-left: 3vw; width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
+                                <h5 class="card-title">@ViewBag.Events[i].Subject</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    @ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
                                 <p class="card-text">@ViewBag.Events[i].Description</p>
-                                <a href="@Url.Action("EventButton","Admin",new { id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
-                                <a href="@Url.Action("EventButton","Admin",new { id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
                             </div>
                         </div>
                     }
-                    
                 </td>
-                <td style="padding-right:2vw;">
-                    @if((i + 1)<count)
+                <td style="padding-right: 2vw;">
+
+                    @if (i + 1 < count)
                     {
-<div class="card" style="width: 18rem; margin-left:3vw;">
-                        <div class="card-body">
-                            <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
-                            <p class="card-text">@ViewBag.Events[i].Description</p>
-                            <a href="@Url.Action("EventButton","Admin",new { id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
-                            <a href="@Url.Action("EventButton","Admin",new { id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
+                        <div class="card" style="margin-left: 3vw; width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    @ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
+                                <p class="card-text">@ViewBag.Events[i].Description</p>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
+                            </div>
                         </div>
-                    </div>
+                    }
+
+                </td>
+                <td style="padding-right: 2vw;">
+                    @if (i + 1 < count)
+                    {
+                        <div class="card" style="margin-left: 3vw; width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    @ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
+                                <p class="card-text">@ViewBag.Events[i].Description</p>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
+                            </div>
+                        </div>
                     }
                 </td>
                 <td>
-                    @if((i + 1)<count)
+                    @if (i + 1 < count)
                     {
-<div class="card" style="width: 18rem; margin-left:3vw;">
-                        <div class="card-body">
-                            <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
-                            <p class="card-text">@ViewBag.Events[i].Description</p>
-                            <a href="@Url.Action("EventButton","Admin",new { id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
-                            <a href="@Url.Action("EventButton","Admin",new { id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
+                        <div class="card" style="margin-left: 3vw; width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">@ViewBag.Events[++i].Subject</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    @ViewBag.Events[i].Organiser <br/> @ViewBag.Events[i].OrganiserEmail <br/> @ViewBag.Events[i].PhoneNumber</h6>
+                                <p class="card-text">@ViewBag.Events[i].Description</p>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 1, init = ViewBag.Events[i].EventID})" class="card-link"}>Approve</a>
+                                <a href="@Url.Action("EventButton", "Admin", new {id = 2, init = ViewBag.Events[i].EventID})" class="card-link"}>Delete</a>
+                            </div>
                         </div>
-                    </div>
                     }
                 </td>
             </tr>
             i++;
-            
-    }
-     </table>
-    
+        }
+    </table>
+
 </div>

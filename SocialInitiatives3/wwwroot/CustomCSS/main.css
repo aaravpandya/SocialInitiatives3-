@@ -1,80 +1,58 @@
 ﻿/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    .Mobile {
-        display: flex;
-    }
+    .Mobile { display: flex; }
 
-    .Desktop {
-        display: none ;
-    }
-    .lead{
-        font-size: 1rem;
-    }
+    .Desktop { display: none; }
+
+    .lead { font-size: 1rem; }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .Mobile {
-        display: flex;
-    }
 
-    .Desktop {
-        display: none ;
-    }
-    .lead{
-        font-size: 1rem;
-    }
+@media only screen and (min-width: 600px) {
+    .Mobile { display: flex; }
+
+    .Desktop { display: none; }
+
+    .lead { font-size: 1rem; }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    .Mobile {
-        display: flex;
-    }
 
-    .Desktop {
-        display: none ;
-    }
-    .lead{
-        font-size: 1rem;
-    }
+@media only screen and (min-width: 768px) {
+    .Mobile { display: flex; }
+
+    .Desktop { display: none; }
+
+    .lead { font-size: 1rem; }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
+
 @media only screen and (min-width: 992px) {
-    .Mobile {
-        display: none ;
-    }
+    .Mobile { display: none; }
 
-    .Desktop {
-        display: flex;
-    }
+    .Desktop { display: flex; }
 
-    .lead {
-        font-size: 1.5rem;
-    }
+    .lead { font-size: 1.5rem; }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
-    .Mobile {
-        display: none ;
-    }
+    .Mobile { display: none; }
 
-    .Desktop {
-        display: flex;
-    }
-  label{
-    font-size:1.5rem;
-}
+    .Desktop { display: flex; }
 
+    label { font-size: 1.5rem; }
 }
 
 .btn {
     background-color: #f44336;
     border-color: #f44336;
-    color : white;
+    color: white;
 }
+
 .btn:hover {
     background-color: black;
     border-color: black;
@@ -83,7 +61,7 @@
 
 .dropdown-item:hover {
     background-color: #f44336;
-    color:white;
+    color: white;
 }
 
 /*#nav1 {

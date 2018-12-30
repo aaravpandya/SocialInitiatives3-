@@ -1,14 +1,10 @@
 ﻿@media only screen and (max-width: 600px) {
-    .Mobile {
-        display: block;
-    }
+    .Mobile { display: block; }
 
-    .Desktop {
-        display: none ;
-    }
-    .image{
-        height:10vh;
-    }
+    .Desktop { display: none; }
+
+    .image { height: 10vh; }
+
     .card-text {
         font-size: 1rem;
         font-weight: 500;
@@ -16,17 +12,14 @@
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .Mobile {
-        display: block;
-    }
 
-    .Desktop {
-        display: none ;
-    }
-    .image {
-        height: 10vh;
-    }
+@media only screen and (min-width: 600px) {
+    .Mobile { display: block; }
+
+    .Desktop { display: none; }
+
+    .image { height: 10vh; }
+
     .card-text {
         font-size: 1.5rem;
         font-weight: 500;
@@ -34,17 +27,14 @@
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    .Mobile {
-        display: block;
-    }
 
-    .Desktop {
-        display: none ;
-    }
-    .image {
-        height: 10vh;
-    }
+@media only screen and (min-width: 768px) {
+    .Mobile { display: block; }
+
+    .Desktop { display: none; }
+
+    .image { height: 10vh; }
+
     .card-text {
         font-size: 1.75rem;
         font-weight: 500;
@@ -52,17 +42,14 @@
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    .Mobile {
-        display: none ;
-    }
 
-    .Desktop {
-        display: block;
-    }
-    .image {
-        height: 20vh;
-    }
+@media only screen and (min-width: 992px) {
+    .Mobile { display: none; }
+
+    .Desktop { display: block; }
+
+    .image { height: 20vh; }
+
     .card-text {
         font-size: 1.75rem;
         font-weight: 500;
@@ -70,29 +57,23 @@
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-    .Mobile {
-        display: none ;
-    }
 
-    .Desktop {
-        display: block;
-    }
-    .image {
-        height: 20vh;
-    }
+@media only screen and (min-width: 1200px) {
+    .Mobile { display: none; }
+
+    .Desktop { display: block; }
+
+    .image { height: 20vh; }
 
     .card-text {
-        font-size : 1.75rem;
-        font-weight:500;
+        font-size: 1.75rem;
+        font-weight: 500;
     }
 }
 
-lead{
-    font-weight:bold;
-}
+lead { font-weight: bold; }
 
-row{
-    padding-top:3vh;
-    padding-bottom:3vh;
+row {
+    padding-bottom: 3vh;
+    padding-top: 3vh;
 }

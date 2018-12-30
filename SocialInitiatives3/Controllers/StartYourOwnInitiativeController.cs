@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SocialInitiatives3.Models;
@@ -12,8 +8,8 @@ namespace SocialInitiatives3.Controllers
 {
     public class StartYourOwnInitiativeController : Controller
     {
-        private AppDbContext _dbContext;
-        private UserManager<AppUser> _usrmgr;
+        private readonly AppDbContext _dbContext;
+        private readonly UserManager<AppUser> _usrmgr;
 
         public StartYourOwnInitiativeController(AppDbContext appADbContext, UserManager<AppUser> userManagers)
         {
@@ -27,22 +23,25 @@ namespace SocialInitiatives3.Controllers
             ViewBag.SelectedNav = "SYOI";
             return View();
         }
+
         [Authorize]
         [Route("[controller]/[action]")]
         public IActionResult PublishForm(SYOIViewModel vm)
         {
-            SYOI s = new SYOI();
-            s.cause = vm.cause;
-            s.idea = vm.idea;
-            s.resources = vm.resources;
-            s.targetGroup = vm.targetGroup;
-            s.team = vm.team;
-            s.UserId = _usrmgr.GetUserId(HttpContext.User);
-            s.User = _dbContext.AppUsers.Find(_usrmgr.GetUserId(HttpContext.User));
-            s.Visible = false;
+            var s = new SYOI
+            {
+                cause = vm.cause,
+                idea = vm.idea,
+                resources = vm.resources,
+                targetGroup = vm.targetGroup,
+                team = vm.team,
+                UserId = _usrmgr.GetUserId(HttpContext.User),
+                User = _dbContext.AppUsers.Find(_usrmgr.GetUserId(HttpContext.User)),
+                Visible = false
+            };
             _dbContext.Add(s);
             _dbContext.SaveChanges();
-            return Redirect(vm?.returnUrl ?? "/Initiatives/Index");
+            return Redirect(vm.returnUrl ?? "/Initiatives/Index");
         }
     }
 }

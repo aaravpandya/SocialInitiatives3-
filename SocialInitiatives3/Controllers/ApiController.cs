@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SocialInitiatives3.Models;
 
@@ -9,7 +6,7 @@ namespace SocialInitiatives3.Controllers
 {
     public class ApiController : Controller
     {
-        private AppDbContext dc;
+        private readonly AppDbContext dc;
 
         public ApiController(AppDbContext appADbContext)
         {
@@ -19,9 +16,8 @@ namespace SocialInitiatives3.Controllers
         [Route("[controller]/[action]")]
         public JsonResult GetEvents()
         {
-            var events = dc.events.Where(j => j.Visible==true).ToList();
+            var events = dc.events.Where(j => j.Visible).ToList();
             return Json(events);
-
         }
     }
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Identity;
 
 namespace SocialInitiatives3.Services
 {
-    public class EmailSender 
+    public class EmailSender
     {
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
@@ -26,7 +22,7 @@ namespace SocialInitiatives3.Services
         public Task Execute(string apiKey, string subject, string message, string email)
         {
             var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
+            var msg = new SendGridMessage
             {
                 From = new EmailAddress("Joe@contoso.com", "Joe Smith"),
                 Subject = subject,

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SocialInitiatives3.Models
 {
@@ -18,8 +14,8 @@ namespace SocialInitiatives3.Models
 
 
         public string UserId { get; set; }
-        [ForeignKey("UserId")]
-        public AppUser User { get; set; }
+
+        [ForeignKey("UserId")] public AppUser User { get; set; }
 
         public bool Visible { get; set; }
     }

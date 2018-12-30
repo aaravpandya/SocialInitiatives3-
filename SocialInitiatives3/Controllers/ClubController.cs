@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SocialInitiatives3.Models;
 using SocialInitiatives3.Models.ViewModels;
 
 namespace SocialInitiatives3.Controllers
 {
     [Route("[controller]/[action]")]
-    
     public class ClubController : Controller
     {
-        private AppDbContext _DbContext;
+        private readonly AppDbContext _DbContext;
 
         public ClubController(AppDbContext appDbContext)
         {
@@ -27,9 +22,9 @@ namespace SocialInitiatives3.Controllers
         }
 
         [Route("[controller]/[action]")]
-        public IActionResult PostForm (ClubViewModel clubViewModel)
+        public IActionResult PostForm(ClubViewModel clubViewModel)
         {
-            ClubUser cu = new ClubUser
+            var cu = new ClubUser
             {
                 UserName = clubViewModel.name,
                 Class = clubViewModel.Class,
@@ -39,7 +34,5 @@ namespace SocialInitiatives3.Controllers
             _DbContext.SaveChanges();
             return Redirect("/Club");
         }
-
-
     }
 }

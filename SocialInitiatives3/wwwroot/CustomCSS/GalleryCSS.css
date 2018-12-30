@@ -1,43 +1,62 @@
 ﻿.row {
     display: flex;
+    -moz-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 0 4px;
 }
 
 /* Create four equal columns that sits next to each other */
+
 .column {
+    -webkit-flex: 25%;
+    -ms-flex: 25%;
+    -o-flex: 25%;
     flex: 25%;
     max-width: 25%;
     padding: 0 4px;
 }
 
-    .column img {
-        margin-top: 8px;
-        vertical-align: middle;
-    }
+.column img {
+    margin-top: 8px;
+    vertical-align: middle;
+}
 
 /* Responsive layout - makes a two column-layout instead of four columns */
+
 @media screen and (max-width: 800px) {
     .column {
+        -webkit-flex: 50%;
+        -ms-flex: 50%;
+        -o-flex: 50%;
         flex: 50%;
         max-width: 50%;
     }
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+
 @media screen and (max-width: 600px) {
     .column {
+        -webkit-flex: 100%;
+        -ms-flex: 100%;
+        -o-flex: 100%;
         flex: 100%;
         max-width: 100%;
     }
 }
 
 .zoom {
+    -ms-transition: transform .2s;
+    -o-transition: transform .2s;
+    -webkit-transition: transform .2s;
     transition: transform .2s;
 }
 
-    .zoom:hover {
-        -ms-transform: scale(2.0); /* IE 9 */
-        -webkit-transform: scale(2.0); /* Safari 3-8 */
-        transform: scale(2.0);
-    }
+.zoom:hover {
+    -ms-transform: scale(2.0); /* IE 9 */
+    -webkit-transform: scale(2.0); /* Safari 3-8 */
+    transform: scale(2.0);
+}

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SocialInitiatives3.Models.ViewModels
+﻿namespace SocialInitiatives3.Models.ViewModels
 {
     public class AppUserViewModel
     {
@@ -15,6 +10,5 @@ namespace SocialInitiatives3.Models.ViewModels
         public string House { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        
     }
 }

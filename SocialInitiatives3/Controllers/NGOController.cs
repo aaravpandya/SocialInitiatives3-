@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using SocialInitiatives3.Infrastructure;
 using SocialInitiatives3.Models;
-using SocialInitiatives3.Models.ViewModels;
 
 namespace SocialInitiatives3.Controllers
 {
     public class NGOController : Controller
     {
-        private AppDbContext _dbContext
-            ;
+        private readonly AppDbContext _dbContext;
 
         public NGOController(AppDbContext context)
         {
@@ -35,13 +30,14 @@ namespace SocialInitiatives3.Controllers
                 TempData["Message"] = "Error";
                 return Redirect("/Index/Home");
             }
-            int i = 0;
-            var success = Int32.TryParse(id, out i);
+
+            var success = int.TryParse(id, out var i);
             if (!success)
             {
                 TempData["Message"] = "An error was encountered. Please try again.";
                 return RedirectToAction("Home", "Index");
             }
+
             //RegisterModel rm = new RegisterModel();
             //rm.initiatives = _dbContext.initiatives.Where(j => j.categoryId == i);
             ViewBag.SelectedNav = "Initiatives";
@@ -49,6 +45,5 @@ namespace SocialInitiatives3.Controllers
             ViewBag.NGOs = _dbContext.nGOs.Where(t => t.categoryId == i).ToList();
             return View();
         }
-
     }
 }

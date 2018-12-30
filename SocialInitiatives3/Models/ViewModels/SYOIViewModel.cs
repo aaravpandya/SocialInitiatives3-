@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SocialInitiatives3.Models.ViewModels
+﻿namespace SocialInitiatives3.Models.ViewModels
 {
     public class SYOIViewModel
     {
@@ -13,6 +8,5 @@ namespace SocialInitiatives3.Models.ViewModels
         public string team { get; set; }
         public string idea { get; set; }
         public string resources { get; set; }
-
     }
 }

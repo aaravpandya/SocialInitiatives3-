@@ -1,16 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
-using SocialInitiatives3.Models.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using SocialInitiatives3.Models.ViewModels;
 
 namespace SocialInitiatives3.Models
 {
     public class AppUser : IdentityUser
     {
-        public AppUser(RegisterModel registerModel) : base()
+        public AppUser(RegisterModel registerModel)
         {
             UserName = Regex.Replace(registerModel.Name, @"\s+", "");
             Name = registerModel.Name;
@@ -20,9 +17,12 @@ namespace SocialInitiatives3.Models
             _class = registerModel._class;
             Section = registerModel.Section;
             House = registerModel.House;
-            
         }
-        public AppUser() : base() { }
+
+        public AppUser()
+        {
+        }
+
         public string Name { get; set; }
         public string AdmissionNumber { get; set; }
         public string _class { get; set; }

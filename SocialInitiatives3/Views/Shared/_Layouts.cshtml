@@ -1,6 +1,6 @@
 ﻿@model RegisterModel
 @{
-    string style = "style=overflow-x:hidden";
+    const string style = "style=overflow-x:hidden";
 }
 <!DOCTYPE html>
 <html @(ViewBag.SelectedNav == "Calendar" ? style : "")>
@@ -20,230 +20,249 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     @if (ViewBag.SelectedNav == "Calendar")
     {
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css"/>
         @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">*@
-
     }
-    @if (!User.Identity.IsAuthenticated && !(ViewBag.SelectedNav == "Register"))
+    @if (!User.Identity.IsAuthenticated && ViewBag.SelectedNav != "Register")
     {
         <script>
-            $(document).ready(function () { $('#loginModal').modal('show'); });</script>
-
+            $(document).ready(function() { $('#loginModal').modal('show'); });
+        </script>
     }
-    <link href="~/CustomCSS/main.css" rel="stylesheet" />
+    <link href="~/CustomCSS/main.css" rel="stylesheet"/>
 </head>
-<body style="overflow-x:hidden" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
-    <!-- NavBar -->
-    <div class="container-fluid" style="padding-left:0; padding-right:0; @(ViewBag.SelectedNav == "Home" ? "background: rgba(0, 0, 0, 0.65);" : "") ">
-        <nav class="navbar navbar-expand-lg @(ViewBag.SelectedNav == "Home" ? "bg-transparent navbar-dark" : "bg-dark navbar-dark") " id="nav1">
-            <a class="navbar-brand" href="@Url.Action("Home", "Index")">
+<body style="overflow-x: hidden" data-spy="scroll" data-target="#myScrollspy" data-offset="1">
+<!-- NavBar -->
+<div class="container-fluid" style="padding-left: 0; padding-right: 0; @(ViewBag.SelectedNav == "Home" ? "background: rgba(0, 0, 0, 0.65);" : "")">
+    <nav class="navbar navbar-expand-lg @(ViewBag.SelectedNav == "Home" ? "bg-transparent navbar-dark" : "bg-dark navbar-dark") " id="nav1">
+        <a class="navbar-brand" href="@Url.Action("Home", "Index")">
 
-                <img src="~/Images/NavBar/0.png" style="width:auto;height:50px;" />
+            <img src="~/Images/NavBar/0.png" style="height: 50px; width: auto;"/>
 
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbarNavDropdown" class="navbar-collapse collapse">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbarNavDropdown" class="navbar-collapse collapse">
 
-                <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto">
 
-                    <li class="nav-item @(ViewBag.SelectedNav == "Home" ? "active" : "") ">
-                        <a class="nav-link" href="@Url.Action("Home","Index")">
-                            Home @if (ViewBag.SelectedNav == "Home")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
+                <li class="nav-item @(ViewBag.SelectedNav == "Home" ? "active" : "") ">
+                    <a class="nav-link" href="@Url.Action("Home", "Index")">
+                        Home
+                        @if (ViewBag.SelectedNav == "Home")
+                        {
+                            <span class="sr-only">(current)</span>
+                        }
+                    </a>
+                </li>
+                <li class="nav-item  @(ViewBag.SelectedNav == "Calendar" ? "active" : "") ">
+                    <a class="nav-link" href="@Url.Action("Index", "Calendar")">
+                        Calendar
+                        @if (ViewBag.SelectedNav == "Calendar")
+                        {
+                            <span class="sr-only">(current)</span>
+                        }
+                    </a>
+                </li>
+                <li class="nav-item dropdown  @(ViewBag.SelectedNav == "Initiatives" ? "active" : "") @(ViewBag.SelectedNav == "NGO" ? "active" : "") ">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Volunteer
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="@(ViewBag.SelectedNav == "Home" ? "background: rgba(0, 0, 0, 0.65);" : "")">
+                        <a class="dropdown-item" style="@(ViewBag.SelectedNav == "Home" ? "color:white;" : "")" href="@Url.Action("Index", "Initiatives")">Initiatives</a>
+                        <a class="dropdown-item" style="@(ViewBag.SelectedNav == "Home" ? "color:white;" : "")" href="@Url.Action("Index", "NGO")">NGO</a>
+                    </div>
+                </li>
+                <li class="nav-item @(ViewBag.SelectedNav == "SYOI" ? "active" : "")">
+                    <a class="nav-link" href="@Url.Action("Index", "StartYourOwnInitiative")">
+                        Start your own Initiative
+                        @if (ViewBag.SelectedNav == "SYOI")
+                        {
+                            <span class="sr-only">(current)</span>
+                        }
+                    </a>
+                </li>
+                <li class="nav-item  @(ViewBag.SelectedNav == "Club" ? "active" : "")">
+                    <a class="nav-link" href="@Url.Action("Index", "Club")">
+                        Club
+                        @if (ViewBag.SelectedNav == "Club")
+                        {
+                            <span class="sr-only">(current)</span>
+                        }
+                    </a>
+                </li>
+                <li class="nav-item  @(ViewBag.SelectedNav == "Gallery" ? "active" : "")">
+                    <a class="nav-link" href="@Url.Action("Index", "Gallery")">
+                        Gallery
+                        @if (ViewBag.SelectedNav == "Gallery")
+                        {
+                            <span class="sr-only">(current)</span>
+                        }
+                    </a>
+                </li>
+                <li class="nav-item  @(ViewBag.SelectedNav == "ContactUs" ? "active" : "")">
+                    <a class="nav-link" href="@Url.Action("Index", "ContactUs")">
+                        Contact Us
+                        @if (ViewBag.SelectedNav == "Contact")
+                        {
+                            <span class="sr-only">(current)</span>
+                        }
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item" style="padding-right: 1vw;">
+                        <button type="button" class="btn " data-toggle="modal" data-target="#loginModal">Login</button>
                     </li>
-                    <li class="nav-item  @(ViewBag.SelectedNav == "Calendar" ? "active" : "") ">
-                        <a class="nav-link" href="@Url.Action("Index","Calendar")">
-                            Calendar @if (ViewBag.SelectedNav == "Calendar")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
+                }
+                else
+                {
+                    <li class="nav-item" style="margin-right: 1vw;">
+                        <button onclick="location.href = '@Url.Action("LogOut", "Account")'" class="btn "> Logout </button>
+                        <button type="button" onclick="location.href = '@Url.Action("IndexAsync", "UserAccount")'" class="btn">
+                            <i class="fa fa-user" aria-hidden="true"></i> User
+                        </button>
                     </li>
-                    <li class="nav-item dropdown  @(ViewBag.SelectedNav == "Initiatives" ? "active" : "")  @(ViewBag.SelectedNav == "NGO" ? "active" : "") ">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Volunteer
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="@(ViewBag.SelectedNav == "Home" ? "background: rgba(0, 0, 0, 0.65);" : "")">
-                            <a class="dropdown-item" style="@(ViewBag.SelectedNav == "Home"?"color:white;":"")" href="@Url.Action("Index","Initiatives")">Initiatives</a>
-                            <a class="dropdown-item" style="@(ViewBag.SelectedNav == "Home"?"color:white;":"")" href="@Url.Action("Index","NGO")">NGO</a>
-                        </div>
+                }
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <button type="button" class="btn" onclick="location.href = '@Url.Action("RegisterV", "Account")'">Register</button>
                     </li>
-                    <li class="nav-item @(ViewBag.SelectedNav == "SYOI" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index","StartYourOwnInitiative")">
-                            Start your own Initiative @if (ViewBag.SelectedNav == "SYOI")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>
-                    <li class="nav-item  @(ViewBag.SelectedNav == "Club" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index","Club")">
-                            Club @if (ViewBag.SelectedNav == "Club")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>
-                    <li class="nav-item  @(ViewBag.SelectedNav == "Gallery" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index","Gallery")">
-                            Gallery @if (ViewBag.SelectedNav == "Gallery")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>
-                    <li class="nav-item  @(ViewBag.SelectedNav == "ContactUs" ? "active" : "")">
-                        <a class="nav-link" href="@Url.Action("Index","ContactUs")">
-                            Contact Us @if (ViewBag.SelectedNav == "Contact")
-                            {<span class="sr-only">(current)</span>}
-                        </a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-
-                        <li class="nav-item" style="padding-right: 1vw;">
-                            <button type="button" class="btn " data-toggle="modal" data-target="#loginModal">Login</button>
-                        </li>
-
-                    }
-                    else
-                    {
-                        <li class="nav-item" style="margin-right: 1vw;">
-                            <button onclick="location.href='@Url.Action("LogOut", "Account")'" class="btn "> Logout </button>
-                            <button type="button" onclick="location.href='@Url.Action("IndexAsync", "UserAccount")'" class="btn">
-                                <i class="fa fa-user" aria-hidden="true"></i> User
-                            </button>
-                        </li>
-                    }
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <li class="nav-item">
-                            <button type="button" class="btn" onclick="location.href='@Url.Action("RegisterV", "Account")'">Register</button>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <!-- Modal Popup for Login -->
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModallabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <form asp-action="Login" asp-controller="Account" method="post">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color:#f44336;color :white;">
-                        <h5 class="modal-title mx-auto text-center lead font-weight-bold" style="font-size:1.5rem;" id="loginModalLabel">Login</h5>
-                        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                }
+            </ul>
+        </div>
+    </nav>
+</div>
+<!-- Modal Popup for Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModallabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #f44336; color: white;">
+                    <h5 class="modal-title mx-auto text-center lead font-weight-bold" style="font-size: 1.5rem;" id="loginModalLabel">Login</h5>
+                    @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true" style="color:white">&times;</span>
                             </button>*@
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" asp-for="ReturnUrl"/>
+                    <div class="form-group">
+                        <label class="lead" asp-for="Email" style="font-size: 1.5rem;">Email address</label>
+                        <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" asp-for="Email"/>
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" asp-for="ReturnUrl" />
-                        <div class="form-group">
-                            <label class="lead" asp-for="Email" style="font-size:1.5rem;">Email address</label>
-                            <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" asp-for="Email" />
-                        </div>
-                        <div class="form-group">
-                            <label class="lead" asp-for="Password" style="font-size:1.5rem;">Password</label>
-                            <input type="password" class="form-control" asp-for="Password" placeholder="Password">
-                        </div>
-                        <div>
-                            <p class="lead" style="font-size:1.5rem;">Not registered yet? <a href="@Url.Action("RegisterV","Account")">Register here!</a></p>
-                        </div>
-                        <div>
-                            <p class="lead" style="font-size:1.5rem;"><a href="@Url.Action("ResetPassword","Account")">Forgot Password?</a></p>
-                        </div>
+                    <div class="form-group">
+                        <label class="lead" asp-for="Password" style="font-size: 1.5rem;">Password</label>
+                        <input type="password" class="form-control" asp-for="Password" placeholder="Password">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary lead" data-dismiss="modal" style="font-size:1.5rem;">Close</button>
-                        <button type="submit" class="btn btn-primary lead" style="font-size:1.5rem;">Login</button>
+                    <div>
+                        <p class="lead" style="font-size: 1.5rem;">Not registered yet? <a href="@Url.Action("RegisterV", "Account")">Register here!</a></p>
+                    </div>
+                    <div>
+                        <p class="lead" style="font-size: 1.5rem;">
+                            <a href="@Url.Action("ResetPassword", "Account")">Forgot Password?</a>
+                        </p>
                     </div>
                 </div>
-            </form>
-        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary lead" data-dismiss="modal" style="font-size: 1.5rem;">Close</button>
+                    <button type="submit" class="btn btn-primary lead" style="font-size: 1.5rem;">Login</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div style="overflow-x:hidden;@(ViewBag.SelectedNav == "Home" ? "z-index:-1;position:absolute; top:0":"")">
+</div>
+<div style="overflow-x: hidden; @(ViewBag.SelectedNav == "Home" ? "z-index:-1;position:absolute; top:0" : "")">
 
-        @RenderBody()
+    @RenderBody()
 
 
 
-        @if (ViewBag.SelectedNav == "Calendar")
-        {
-
-            @RenderSection("Scripts", false)
-        }
-
-        <div style="@(ViewBag.Page=="Category"?"":"padding-top:3vh;")">
-            <div class="row bg-dark" style="padding-top:3vh;padding-bottom:3vh;color:white">
-                <table class="Desktop mx-auto">
-                    <tr>
-                        <td style="width:36vw;"><img src="~/Images/NavBar/1.png" style="width:auto; height:90px; padding-left:2vw;" /><img src="~/Images/NavBar/2.png" style="width:auto; height:90px; padding-left:2vw;" /></td>
-
-                        <td style="width:32vw; text-align:center;">
-                            <p class="mx-auto">Address:</p><p class="mx-auto">The Shri Ram School, Moulsari, DLF phase 3, Moulsari avenue</p>
-                        </td>
-                        <td style="text-align:center; width:32vw;padding-left:7vw;">
-                            <p class="mx-auto">Contact</p><p class="mx-auto">
-                                dhanwanti.mishra@tsrs.org <br />
-                                chadha.rohan@yahoo.com <br />
-                                taarins13@gmail.com
-                            </p>
-                        </td>
-
-                    </tr>
-
-                </table>
-                <table class="Mobile mx-auto">
-                    <tr>
-                        <td class="float-right">
-                            <img src="/Images/NavBar/1.png" style="width:auto; height:90px;padding-left:2vw;">
-                        </td>
-                        <td class="float-left">
-                            <img src="/Images/NavBar/2.png" style="width:auto; height:90px;padding-left:2vw;">
-                        </td>
-                    </tr>
-
-                </table>
-
-            </div>
-            <div class="Mobile bg-dark">
-                <table class="lead mx-auto" style="color:white">
-                    <tr>
-                        <th class="align-middle" style="padding-left:6vw;">
-                            Address
-                        </th>
-                        <th class="float-right" style="padding-right:6vw;">
-                            Contact
-                        </th>
-
-                    </tr>
-                    <tr>
-                        <td class="align-middle" style="padding-left:6vw;">
-                            The Shri Ram School, Moulsari,<br /> DLF phase 3, Moulsari avenue
-                        </td>
-                        <td class="float-right" style="padding-right:6vw;">
-                            dhanwanti.mishra@tsrs.org <br />
-                            chadha.rohan@yahoo.com <br />
-                            taarins13@gmail.com
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-        </div>
-    </div>
-    @{
-        string message = (string)TempData["Message"];
-        if (message != null)
-        {
-            <div class="alert alert-warning alert-dismissible fade show mx-auto" style="position:absolute;bottom:0px;" role="alert">
-                <strong>@message</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        }
+    @if (ViewBag.SelectedNav == "Calendar")
+    {
+        @RenderSection("Scripts", false)
     }
+
+    <div style="@(ViewBag.Page == "Category" ? "" : "padding-top:3vh;")">
+        <div class="row bg-dark" style="color: white; padding-bottom: 3vh; padding-top: 3vh;">
+            <table class="Desktop mx-auto">
+                <tr>
+                    <td style="width: 36vw;">
+                        <img src="~/Images/NavBar/1.png" style="height: 90px; padding-left: 2vw; width: auto;"/><img src="~/Images/NavBar/2.png" style="height: 90px; padding-left: 2vw; width: auto;"/>
+                    </td>
+
+                    <td style="text-align: center; width: 32vw;">
+                        <p class="mx-auto">Address:</p>
+                        <p class="mx-auto">The Shri Ram School, Moulsari, DLF phase 3, Moulsari avenue</p>
+                    </td>
+                    <td style="padding-left: 7vw; text-align: center; width: 32vw;">
+                        <p class="mx-auto">Contact</p>
+                        <p class="mx-auto">
+                            dhanwanti.mishra@tsrs.org <br/>
+                            chadha.rohan@yahoo.com <br/>
+                            taarins13@gmail.com
+                        </p>
+                    </td>
+
+                </tr>
+
+            </table>
+            <table class="Mobile mx-auto">
+                <tr>
+                    <td class="float-right">
+                        <img src="/Images/NavBar/1.png" style="height: 90px; padding-left: 2vw; width: auto;">
+                    </td>
+                    <td class="float-left">
+                        <img src="/Images/NavBar/2.png" style="height: 90px; padding-left: 2vw; width: auto;">
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+        <div class="Mobile bg-dark">
+            <table class="lead mx-auto" style="color: white">
+                <tr>
+                    <th class="align-middle" style="padding-left: 6vw;">
+                        Address
+                    </th>
+                    <th class="float-right" style="padding-right: 6vw;">
+                        Contact
+                    </th>
+
+                </tr>
+                <tr>
+                    <td class="align-middle" style="padding-left: 6vw;">
+                        The Shri Ram School, Moulsari,<br/> DLF phase 3, Moulsari avenue
+                    </td>
+                    <td class="float-right" style="padding-right: 6vw;">
+                        dhanwanti.mishra@tsrs.org <br/>
+                        chadha.rohan@yahoo.com <br/>
+                        taarins13@gmail.com
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
+@{
+    var message = (string) TempData["Message"];
+    if (message != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show mx-auto" style="bottom: 0; position: absolute;" role="alert">
+            <strong>@message</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+}
 
 </body>
 </html>

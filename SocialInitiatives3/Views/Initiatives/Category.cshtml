@@ -1,6 +1,6 @@
 ﻿<div style="background-color: @ViewBag.Color">
-    <h2 class="display-1 text-center Desktop" style="color:white">@ViewBag.Title</h2>
-    <h2 class="display-4 text-center Mobile" style="color:white">@ViewBag.Title</h2>
+    <h2 class="display-1 text-center Desktop" style="color: white">@ViewBag.Title</h2>
+    <h2 class="display-4 text-center Mobile" style="color: white">@ViewBag.Title</h2>
 
     <div class="container-fluid">
 
@@ -8,68 +8,67 @@
             int count = ViewBag.initiatives.Count;
         }
         <table class="mx-auto">
-            @for (int i = 0; i < count;)
+            @for (var i = 0; i < count;)
             {
-
                 <tr>
                     <td>
                         @if (i < count)
                         {
-                            <div style="padding-top:2vh; padding-bottom:2vh; padding-right:2vw;">
-                                <div class="card mx-auto" style="padding-top:1vh;border-style:solid;border-color:black; border-width:2px;">
+                            <div style="padding-bottom: 2vh; padding-right: 2vw; padding-top: 2vh;">
+                                <div class="card mx-auto" style="border-color: black; border-style: solid; border-width: 2px; padding-top: 1vh;">
                                     <div class="row no-gutters">
-                                        <div class="col-auto" style="padding-top:2vh; padding-left:2vh;">
-                                            <img src="@ViewBag.initiatives[i].filepath" class="img-fluid rounded-circle" alt="" style="width:10vw;">
+                                        <div class="col-auto" style="padding-left: 2vh; padding-top: 2vh;">
+                                            <img src="@ViewBag.initiatives[i].filepath" class="img-fluid rounded-circle" alt="" style="width: 10vw;">
                                         </div>
-                                        <div class="col" style="padding-bottom:2vh;">
-                                            <div class="card-block px-2" style="padding-bottom:2vh;">
-                                                <h4 class="card-title"><lead>@ViewBag.initiatives[i].InitiativeName</lead></h4>
+                                        <div class="col" style="padding-bottom: 2vh;">
+                                            <div class="card-block px-2" style="padding-bottom: 2vh;">
+                                                <h4 class="card-title">
+                                                    <lead>@ViewBag.initiatives[i].InitiativeName</lead>
+                                                </h4>
                                                 <p class="card-text">
-                                                    <b>What do we do:</b><br />
-                                                    @ViewBag.initiatives[i].work <br />
-                                                    <b>Who do we work with: </b><br />
-                                                    @ViewBag.initiatives[i].team<br />
-                                                    <b>Where do we work:</b><br />
-                                                    @ViewBag.initiatives[i].InitiativeAddress<br />
+                                                    <b>What do we do:</b><br/>
+                                                    @ViewBag.initiatives[i].work <br/>
+                                                    <b>Who do we work with: </b><br/>
+                                                    @ViewBag.initiatives[i].team<br/>
+                                                    <b>Where do we work:</b><br/>
+                                                    @ViewBag.initiatives[i].InitiativeAddress<br/>
                                                 </p>
                                                 @if (ViewBag.uvlist.Contains(ViewBag.initiatives[i]))
                                                 {
                                                     <a href="#" class="btn btn-primary disabled"><i class="fa fa-check"></i>Volunteered</a>
-
                                                 }
                                                 else
                                                 {
-                                                    <a href="@Url.Action("Volunteer", "Initiatives", new { id = ViewBag.initiatives[i].InitiativeId})" class="btn btn-primary">Volunteer</a>
-
+                                                    <a href="@Url.Action("Volunteer", "Initiatives", new {id = ViewBag.initiatives[i].InitiativeId})" class="btn btn-primary">Volunteer</a>
                                                 }
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 text-muted">
-                                        Contact Info:<br />
+                                        Contact Info:<br/>
                                         @if (ViewBag.initiatives[i].phoneNumber != null)
                                         {
                                             string j = "Phone Number:" + ViewBag.initiatives[i].phoneNumber;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
                                         @if (ViewBag.initiatives[i].instagramLink != null)
                                         {
                                             string j = "Instagram: " + ViewBag.initiatives[i].instagramLink;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
                                         @if (ViewBag.initiatives[i].websiteLink != null)
                                         {
                                             string j = "Website: " + ViewBag.initiatives[i].websiteLink;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
                                         @if (ViewBag.initiatives[i].User.Email != null)
                                         {
                                             string j = "User Email: " + ViewBag.initiatives[i].User.Email;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
 
                                     </div>
@@ -80,63 +79,63 @@
                     </td>
                     <td>
 
-                        @if ((i + 1) < count)
+                        @if (i + 1 < count)
                         {
-                            <div style="padding-top:2vh; padding-bottom:2vh; padding-left:2vw;">
-                                <div class="card mx-auto" style="padding-top:1vh;border-style:solid;border-color:black; border-width:2px;">
+                            <div style="padding-bottom: 2vh; padding-left: 2vw; padding-top: 2vh;">
+                                <div class="card mx-auto" style="border-color: black; border-style: solid; border-width: 2px; padding-top: 1vh;">
                                     <div class="row no-gutters">
-                                        <div class="col-auto" style="padding-top:2vh; padding-left:2vh;">
-                                            <img src="@ViewBag.initiatives[++i].filepath" class="img-fluid" alt="" style="width:10vw;">
+                                        <div class="col-auto" style="padding-left: 2vh; padding-top: 2vh;">
+                                            <img src="@ViewBag.initiatives[++i].filepath" class="img-fluid" alt="" style="width: 10vw;">
                                         </div>
-                                        <div class="col" style="padding-bottom:2vh;">
-                                            <div class="card-block px-2" style="padding-bottom:2vh;">
-                                                <h4 class="card-title"><lead>@ViewBag.initiatives[i].InitiativeName</lead></h4>
+                                        <div class="col" style="padding-bottom: 2vh;">
+                                            <div class="card-block px-2" style="padding-bottom: 2vh;">
+                                                <h4 class="card-title">
+                                                    <lead>@ViewBag.initiatives[i].InitiativeName</lead>
+                                                </h4>
                                                 <p class="card-text">
-                                                    <b>What do we do:</b><br />
-                                                    @ViewBag.initiatives[i].work <br />
-                                                    <b>Who do we work with: </b><br />
-                                                    @ViewBag.initiatives[i].team<br />
-                                                    <b>Where do we work:</b><br />
-                                                    @ViewBag.initiatives[i].InitiativeAddress<br />
+                                                    <b>What do we do:</b><br/>
+                                                    @ViewBag.initiatives[i].work <br/>
+                                                    <b>Who do we work with: </b><br/>
+                                                    @ViewBag.initiatives[i].team<br/>
+                                                    <b>Where do we work:</b><br/>
+                                                    @ViewBag.initiatives[i].InitiativeAddress<br/>
                                                 </p>
                                                 @if (ViewBag.uvlist.Contains(ViewBag.initiatives[i]))
                                                 {
                                                     <a href="#" class="btn btn-primary disabled"><i class="fas fa-check"></i>Volunteered</a>
-
                                                 }
                                                 else
                                                 {
-                                                    <a href="@Url.Action("Volunteer", "Initiatives", new { id = ViewBag.initiatives[i].InitiativeId})" class="btn btn-primary">Volunteer</a>
-
+                                                    <a href="@Url.Action("Volunteer", "Initiatives", new {id = ViewBag.initiatives[i].InitiativeId})" class="btn btn-primary">Volunteer</a>
                                                 }
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer w-100 text-muted">
-                                        Contact Info:<br />
+                                        Contact Info:<br/>
                                         @if (ViewBag.initiatives[i].phoneNumber != null)
                                         {
                                             string j = "Phone Number:" + ViewBag.initiatives[i].phoneNumber;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
                                         @if (ViewBag.initiatives[i].instagramLink != null)
                                         {
                                             string j = "Instagram: " + ViewBag.initiatives[i].instagramLink;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
                                         @if (ViewBag.initiatives[i].websiteLink != null)
                                         {
                                             string j = "Website: " + ViewBag.initiatives[i].websiteLink;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
                                         @if (ViewBag.initiatives[i].User.Email != null)
                                         {
                                             string j = "User Email: " + ViewBag.initiatives[i].User.Email;
-                                            @j;
-                                            <br />
+                                            @j
+                                            <br/>
                                         }
 
                                     </div>
@@ -148,7 +147,6 @@
                     </td>
                 </tr>
                 i++;
-
             }
         </table>
 

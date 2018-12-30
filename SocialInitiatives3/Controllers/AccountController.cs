@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SendGrid;
@@ -20,18 +14,17 @@ namespace SocialInitiatives3.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private UserManager<AppUser> userManager;
-        private SignInManager<AppUser> signInManager;
-        private AppDbContext AppIdentityDbContext;
-        private IMapper _mapper;
-        private RoleManager<IdentityRole> _rolmgr;
+        private readonly IMapper _mapper;
+        private readonly RoleManager<IdentityRole> _rolmgr;
+        private readonly SignInManager<AppUser> signInManager;
+        private readonly UserManager<AppUser> userManager;
 
         public AccountController(UserManager<AppUser> userMgr,
-                SignInManager<AppUser> signInMgr, AppDbContext dbContext, IMapper mapper, RoleManager<IdentityRole> roleManager)
+            SignInManager<AppUser> signInMgr, IMapper mapper,
+            RoleManager<IdentityRole> roleManager)
         {
             userManager = userMgr;
             signInManager = signInMgr;
-            AppIdentityDbContext = dbContext;
             _mapper = mapper;
             _rolmgr = roleManager;
         }
@@ -45,11 +38,8 @@ namespace SocialInitiatives3.Controllers
         public async Task<IActionResult> Register(RegisterModel registerModel)
         {
             //Regex.Match(registerModel.PhoneNumber, @"/[2-9]{2}\d{8}/")
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            AppUser user = null;
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+            AppUser user;
             var match = Regex.Match(registerModel.PhoneNumber, @"\d{10}");
             var match2 = Regex.Match(registerModel.AdmissionNumber, @"\d{4}");
             if (match.Success && match2.Success)
@@ -58,45 +48,39 @@ namespace SocialInitiatives3.Controllers
             }
             else
             {
-                TempData["Message"] = "Invalid phone number or admission number. Please try again with correct details.";
+                TempData["Message"] =
+                    "Invalid phone number or admission number. Please try again with correct details.";
                 return RedirectToAction("Home", "Index");
             }
-            IdentityResult result = await userManager.CreateAsync(user, registerModel.Password);
+
+            var result = await userManager.CreateAsync(user, registerModel.Password);
             if (!result.Succeeded)
             {
                 TempData["Message"] = "Error in creating user. Please try again.";
                 return RedirectToAction("Home", "Index");
             }
 
-            IdentityResult roleResult;
             var roleCheck = await _rolmgr.RoleExistsAsync("User");
-            if (!roleCheck)
-            {
-                //create the roles and seed them to the database 
-                roleResult = await _rolmgr.CreateAsync(new IdentityRole("User"));
-            }
+            if (!roleCheck) await _rolmgr.CreateAsync(new IdentityRole("User"));
             user = await userManager.FindByEmailAsync(user.Email);
             roleCheck = await _rolmgr.RoleExistsAsync("Admin");
-            if (!roleCheck)
-            {
-                //create the roles and seed them to the database 
-                await _rolmgr.CreateAsync(new IdentityRole("Admin"));
-            }
+            if (!roleCheck) await _rolmgr.CreateAsync(new IdentityRole("Admin"));
             //Assign Admin role to the main User here we have given our newly registered  
             //login id for Admin management 
 
-            if (Emails.emails.Contains(user.Email.ToString()))
+            if (Emails.emails.Contains(user.Email))
                 await userManager.AddToRoleAsync(user, "Admin");
             await userManager.AddToRoleAsync(user, "User");
             var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Action("ConfirmEmailAsync", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            var callbackUrl = Url.Action("ConfirmEmailAsync", "Account", new {userId = user.Id, code},
+                HttpContext.Request.Scheme);
             //var callbackUrl = Url.Page("/Account/ConfirmEmail", pageHandler: null,values: new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
             var client = new SendGridClient(SendGridDetails.APIKEY);
-            var msg = new SendGridMessage()
+            var msg = new SendGridMessage
             {
                 From = new EmailAddress("admin@tsrssocialinitiatives.com", "TSRS Social Initiatives"),
                 Subject = "EmailConfirmation",
-                HtmlContent = $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>.",
+                HtmlContent = $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>."
             };
             msg.AddTo(new EmailAddress(user.Email));
 
@@ -110,43 +94,45 @@ namespace SocialInitiatives3.Controllers
             return Redirect("/Index/Home");
         }
 
-        public async Task<IActionResult> ResendEmailConfirmation()
+        public RedirectResult ResendEmailConfirmation()
         {
             return Redirect("/Index/Home");
         }
 
-        public async Task<IActionResult> Login (LoginModel login)
+        public async Task<IActionResult> Login(LoginModel login)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 TempData["Message"] = "Error. Please try again.";
                 return RedirectToAction("Home", "Index");
             }
+
             var user = await userManager.FindByEmailAsync(login.Email);
-            if(!(await userManager.IsEmailConfirmedAsync(user)))
+            if (!await userManager.IsEmailConfirmedAsync(user))
             {
                 TempData["Message"] = "Confirm your email before sign in";
                 return Redirect("/Index/Home");
             }
-            if(user != null)
+
+            if (user != null)
             {
                 await signInManager.SignOutAsync();
-                if((await signInManager.PasswordSignInAsync(user, login.Password, false, false)).Succeeded)
-                {
-                    return Redirect(login?.ReturnUrl ?? "/Index/Home");
-                }
+                if ((await signInManager.PasswordSignInAsync(user, login.Password, false, false)).Succeeded)
+                    return Redirect(login.ReturnUrl ?? "/Index/Home");
             }
-            
+
             TempData["Message"] = "Invalid name or password";
             return Redirect("/Index/Home");
         }
-        public async Task<IActionResult> LogOut ()
+
+        public async Task<IActionResult> LogOut()
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 TempData["Message"] = "Error";
                 return Redirect("/Index/Home");
             }
+
             await signInManager.SignOutAsync();
             return RedirectToAction("Home", "Index");
         }
@@ -158,39 +144,44 @@ namespace SocialInitiatives3.Controllers
 
         public async Task<IActionResult> ChangePassword(PasswordModel model)
         {
-            if(!(model.newPassword == model.confirmPassword))
+            if (model.newPassword != model.confirmPassword)
             {
-                
                 TempData["Message"] = "New password and confirm password do match";
                 return Redirect("/Index/Home");
             }
-            AppUser user = await userManager.GetUserAsync(HttpContext.User);
-            IdentityResult result = await userManager.ChangePasswordAsync(user, model.currentPasword, model.newPassword);
-            if(result.Succeeded)
-                if((await userManager.UpdateAsync(user)).Succeeded)
+
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var result = await userManager.ChangePasswordAsync(user, model.currentPasword, model.newPassword);
+            if (result.Succeeded)
+                if ((await userManager.UpdateAsync(user)).Succeeded)
                 {
                     TempData["Message"] = "Password changed";
-                    return RedirectToAction("Index", "UserAccount");
+                    return RedirectToAction("IndexAsync", "UserAccount");
                 }
+
             TempData["Message"] = "Error";
-            return Redirect("/Index/Home"); 
+            return Redirect("/Index/Home");
         }
+
         public async Task<IActionResult> EditAsync()
         {
-            AppUser user = await userManager.GetUserAsync(HttpContext.User);
-            AppUserViewModel model = new AppUserViewModel();
-            model.Name = user.Name;
-            model.PhoneNumber = user.PhoneNumber;
-            model.Section = user.Section;
-            model._class = user._class;
-            model.House = user.House;
-            model.Email = user.Email;
+            var user = await userManager.GetUserAsync(HttpContext.User);
+            var model = new AppUserViewModel
+            {
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber,
+                Section = user.Section,
+                _class = user._class,
+                House = user.House,
+                Email = user.Email
+            };
             ViewBag.model = model;
             return View();
         }
+
         public async Task<IActionResult> EditAccount(AppUserViewModel model)
         {
-            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+            var user = await userManager.GetUserAsync(HttpContext.User);
             user.Name = model.Name;
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
@@ -198,27 +189,24 @@ namespace SocialInitiatives3.Controllers
             user.Section = model.Section;
             user.House = model.House;
             if ((await userManager.UpdateAsync(user)).Succeeded)
-                return RedirectToAction("Index", "UserAccount");
+                return RedirectToAction("IndexAsync", "UserAccount");
             TempData["Message"] = "Error";
             return Redirect("/Index/Home");
-
         }
+
         public async Task<IActionResult> ConfirmEmailAsync(string userid, string code)
         {
-            AppUser user = await userManager.FindByIdAsync(userid);
-            IdentityResult result = await userManager.
-                        ConfirmEmailAsync(user, code);
-            
+            var user = await userManager.FindByIdAsync(userid);
+            var result = await userManager.ConfirmEmailAsync(user, code);
+
             if (result.Succeeded)
             {
                 TempData["Message"] = "Email confirmed successfully!";
                 return RedirectToAction("Home", "Index");
             }
-            else
-            {
-                TempData["Message"] = "Error while confirming your email!";
-                return View("Error");
-            }
+
+            TempData["Message"] = "Error while confirming your email!";
+            return RedirectToAction("Home", "Index");
         }
 
         public IActionResult ResetPassword()
@@ -228,15 +216,15 @@ namespace SocialInitiatives3.Controllers
 
         public async Task<IActionResult> ResetPasswordVAsync(PasswordResetViewModel vm)
         {
-            AppUser user = await userManager.FindByEmailAsync(vm.email);
+            var user = await userManager.FindByEmailAsync(vm.email);
             var code = await userManager.GeneratePasswordResetTokenAsync(user);
-            var callbackUrl = Url.Action("Reset", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+            var callbackUrl = Url.Action("Reset", "Account", new {userId = user.Id, code}, HttpContext.Request.Scheme);
             var client = new SendGridClient(SendGridDetails.APIKEY);
-            var msg = new SendGridMessage()
+            var msg = new SendGridMessage
             {
                 From = new EmailAddress("admin@tsrssocialinitiatives.com", "TSRS Social Initiatives"),
                 Subject = "Password Recovery",
-                HtmlContent = $"Change your password by <a href='{callbackUrl}'>clicking here</a>.",
+                HtmlContent = $"Change your password by <a href='{callbackUrl}'>clicking here</a>."
             };
             msg.AddTo(new EmailAddress(user.Email));
 
@@ -257,7 +245,7 @@ namespace SocialInitiatives3.Controllers
 
         public async Task<IActionResult> ResetPasswordTokenAsync(PasswordResetViewModel viewModel)
         {
-            if(viewModel.password == viewModel.Confirmpassword)
+            if (viewModel.password == viewModel.Confirmpassword)
             {
             }
             else
@@ -267,19 +255,17 @@ namespace SocialInitiatives3.Controllers
                 TempData["Message"] = "Passwords do not match";
                 return RedirectToAction("Reset", "Account");
             }
-            AppUser user = await userManager.FindByIdAsync(viewModel.userId);
-            IdentityResult result = await userManager.ResetPasswordAsync(user, viewModel.code, viewModel.password);
-            if(result.Succeeded)
+
+            var user = await userManager.FindByIdAsync(viewModel.userId);
+            var result = await userManager.ResetPasswordAsync(user, viewModel.code, viewModel.password);
+            if (result.Succeeded)
             {
                 TempData["Message"] = "Password changed.";
                 return RedirectToAction("Home", "Index");
             }
-            else
-            {
-                TempData["Message"] = "Password not changed. Try again.";
-                return RedirectToAction("Home", "Index");
-            }
+
+            TempData["Message"] = "Password not changed. Try again.";
+            return RedirectToAction("Home", "Index");
         }
     }
-
 }

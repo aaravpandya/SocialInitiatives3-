@@ -1,79 +1,50 @@
-﻿
-
-/* Extra small devices (phones, 600px and down) */
+﻿/* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .Mobile { display: flex; }
 
-    .Mobile{
-        display: flex;
-    }
+    .Desktop { display: none; }
 
-    .Desktop {
-        display: none;
-    }
-    #videoone {
-        width: 5rem;
-    }
-    .carousel-item{
-        height:auto;
-    }
+    #videoone { width: 5rem; }
+
+    .carousel-item { height: auto; }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
+
 @media only screen and (min-width: 600px) {
+    .Mobile { display: flex; }
 
-    .Mobile {
-        display: flex;
-    }
+    .Desktop { display: none; }
 
-    .Desktop {
-        display: none;
-    }
-    #videoone {
-        width: 1rem;
-    }
-    .carousel-item {
-        height: auto;
-    }
+    #videoone { width: 1rem; }
+
+    .carousel-item { height: auto; }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
+
 @media only screen and (min-width: 768px) {
+    .Mobile { display: flex; }
 
-    .Mobile {
-        display: flex;
-    }
-
-    .Desktop {
-        display: none;
-    }
+    .Desktop { display: none; }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    .Mobile {
-        display: none;
-    }
 
-    .Desktop {
-        display: flex;
-    }
-    .carousel-item {
-        height: auto;
-    }
+@media only screen and (min-width: 992px) {
+    .Mobile { display: none; }
+
+    .Desktop { display: flex; }
+
+    .carousel-item { height: auto; }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
+
 @media only screen and (min-width: 1200px) {
-    .Mobile {
-        display: none;
-    }
+    .Mobile { display: none; }
 
-    .Desktop {
-        display: flex;
-    }
-    #picCarousel {
-        height: 80vh;
-    }
+    .Desktop { display: flex; }
 
+    #picCarousel { height: 80vh; }
 }
-

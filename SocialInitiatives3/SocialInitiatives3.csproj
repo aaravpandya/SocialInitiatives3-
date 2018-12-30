@@ -8,23 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\**" />
     <Compile Remove="wwwroot\Videos\**" />
+    <Content Remove="wwwroot\lib\**" />
     <Content Remove="wwwroot\Videos\**" />
+    <EmbeddedResource Remove="wwwroot\lib\**" />
     <EmbeddedResource Remove="wwwroot\Videos\**" />
+    <None Remove="wwwroot\lib\**" />
     <None Remove="wwwroot\Videos\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\Image.cs" />
     <Compile Remove="Models\AppIdentityDbContext.cs" />
     <Compile Remove="Models\Person.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\lib\bootstrap-datepicker\datetime.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap-datepicker\datetime.min.js" />
+    <Compile Remove="Services\AuthMessageSenderOptions.cs" />
+    <Compile Remove="Services\EmailSender.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,11 +38,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\lib\bootstrap-datepicker\datetime.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Migrations\" />
+    <Folder Include="Services\" />
     <Folder Include="wwwroot\Images\SubmittedInitiativeImg\" />
   </ItemGroup>
 

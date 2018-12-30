@@ -1,22 +1,22 @@
 ﻿@model SYOIViewModel
-<link href="~/CustomCSS/InitiativeCSS.css" rel="stylesheet" />
+<link href="~/CustomCSS/InitiativeCSS.css" rel="stylesheet"/>
 <div class="row">
     <p class="display-1 mx-auto Heading">
-      Start your own Initiative!  
+        Start your own Initiative!
     </p>
 </div>
-<div style="padding-top:3vw;padding-bottom:3vw;">
+<div style="padding-bottom: 3vw; padding-top: 3vw;">
     <form asp-action="PublishForm" asp-controller="StartYourOwnInitiative" method="post">
         <input type="hidden" name="returnUrl"
-               value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+               value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
         <div class="form-group">
             <div class="media">
                 <iframe src="https://www.youtube.com/embed/V95m0O7dKi4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="col-6 mx-auto media-body">
                     <h5 class="display-4 text-center subheading">Your Cause</h5>
-                    <textarea class="form-control mx-auto Desktop ta" rows=5 id="comment" placeholder="Your cause - what problem are you solving?"
+                    <textarea class="form-control mx-auto Desktop ta" rows="5" id="comment" placeholder="Your cause - what problem are you solving?"
                               asp-for="cause"></textarea>
-                    <textarea class="form-control mx-auto mx-auto Mobile ta" rows=3 id="comment" placeholder="Your cause - what problem are you solving?"
+                    <textarea class="form-control mx-auto mx-auto Mobile ta" rows="3" id="comment" placeholder="Your cause - what problem are you solving?"
                               asp-for="cause"></textarea>
                 </div>
             </div>
@@ -26,13 +26,13 @@
             <div class="media">
                 <div class="col-6 mx-auto media-body">
                     <h5 class="display-4 text-center subheading">Your idea</h5>
-                    <textarea class="form-control mx-auto Desktop ta" rows=5 id="comment" asp-for="idea" placeholder="Your idea - How does it address the problem?"></textarea>
-                    <textarea class="form-control mx-auto mx-auto Mobile ta" rows=3 id="comment" asp-for="idea" placeholder="Your idea - How does it address the problem?"></textarea>
+                    <textarea class="form-control mx-auto Desktop ta" rows="5" id="comment" asp-for="idea" placeholder="Your idea - How does it address the problem?"></textarea>
+                    <textarea class="form-control mx-auto mx-auto Mobile ta" rows="3" id="comment" asp-for="idea" placeholder="Your idea - How does it address the problem?"></textarea>
 
                 </div>
                 <iframe src="https://www.youtube.com/embed/EBAYQav2IJI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
- 
+
             </div>
 
         </div>
@@ -41,9 +41,9 @@
                 <iframe src="https://www.youtube.com/embed/hFeiFZNB_ME" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="col-6 mx-auto media-body">
                     <h5 class="display-4 text-center subheading">Your target group</h5>
-                    <textarea class="form-control mx-auto Desktop ta ta" rows=5 id="comment" placeholder="Your target group - Who all are you helping?"
+                    <textarea class="form-control mx-auto Desktop ta ta" rows="5" id="comment" placeholder="Your target group - Who all are you helping?"
                               asp-for="targetGroup"></textarea>
-                    <textarea class="form-control mx-auto Mobile ta" rows=3 id="comment" placeholder="Your target group - Who all are you helping?"
+                    <textarea class="form-control mx-auto Mobile ta" rows="3" id="comment" placeholder="Your target group - Who all are you helping?"
                               asp-for="targetGroup"></textarea>
 
                 </div>
@@ -53,8 +53,8 @@
             <div class="media">
                 <div class="col-6 mx-auto media-body">
                     <h5 class="display-4 text-center subheading">Your team</h5>
-                    <textarea class="form-control mx-auto Desktop ta" rows=5 id="comment" asp-for="team" style="text-align: right;" placeholder="Your team - Who all are you working with?"></textarea>
-                    <textarea class="form-control mx-auto Mobile ta" rows=3 id="comment" asp-for="team" style="text-align: right;" placeholder="Your team - Who all are you working with?"></textarea>
+                    <textarea class="form-control mx-auto Desktop ta" rows="5" id="comment" asp-for="team" style="text-align: right;" placeholder="Your team - Who all are you working with?"></textarea>
+                    <textarea class="form-control mx-auto Mobile ta" rows="3" id="comment" asp-for="team" style="text-align: right;" placeholder="Your team - Who all are you working with?"></textarea>
 
 
                 </div>
@@ -66,9 +66,9 @@
                 <iframe src="https://www.youtube.com/embed/rhhrkpbzQmo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="col-6 mx-auto media-body">
                     <h5 class="display-4 text-center subheading">Your resources</h5>
-                    <textarea class="form-control mx-auto Desktop ta" rows=5 id="comment" placeholder="What are your resources?"
+                    <textarea class="form-control mx-auto Desktop ta" rows="5" id="comment" placeholder="What are your resources?"
                               asp-for="resources"></textarea>
-                    <textarea class="form-control mx-auto Mobile ta" rows=3  id="comment" placeholder="What are your resources?"
+                    <textarea class="form-control mx-auto Mobile ta" rows="3"  id="comment" placeholder="What are your resources?"
                               asp-for="resources"></textarea>
                 </div>
             </div>
@@ -77,15 +77,16 @@
             <div class="mx-auto">
                 @if (!User.Identity.IsAuthenticated)
                 {
-                    <span><button class="btn" data-toggle="modal" data-target="#loginModal">Login to suggest your Idea</button></span>
+                    <span>
+                        <button class="btn" data-toggle="modal" data-target="#loginModal">Login to suggest your Idea</button>
+                    </span>
                 }
                 else
                 {
-                    <button style="margin-left:2vw;" type="submit" class="btn btn-primary">Submit</button>
+                    <button style="margin-left: 2vw;" type="submit" class="btn btn-primary">Submit</button>
                 }
-                
+
             </div>
         </div>
     </form>
 </div>
-

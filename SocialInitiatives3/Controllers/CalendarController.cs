@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,8 +10,8 @@ namespace SocialInitiatives3.Controllers
 {
     public class CalendarController : Controller
     {
-        private AppDbContext dc;
-        private UserManager<AppUser> _usrmgr;
+        private readonly UserManager<AppUser> _usrmgr;
+        private readonly AppDbContext dc;
 
         public CalendarController(AppDbContext appADbContext, UserManager<AppUser> userManager)
         {
@@ -30,26 +28,28 @@ namespace SocialInitiatives3.Controllers
 
         [Authorize]
         [Route("[controller]/[action]")]
-        public IActionResult AddEvents (EventViewModel viewModel)
+        public IActionResult AddEvents(EventViewModel viewModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 TempData["Message"] = "Error";
                 return Redirect("/Index/Home");
             }
-            Event e = new Event();
-            e.Subject = viewModel.Subject;
-            e.Organiser = viewModel.Organizer;
-            e.Start = DateTime.ParseExact( viewModel.Start, "MM/dd/yyyy h:mm tt", System.Globalization.CultureInfo.InvariantCulture);
-            if(viewModel.End != null)
+
+            var e = new Event
             {
-                e.End = e.Start = DateTime.ParseExact(viewModel.End, "MM/dd/yyyy h:mm tt", System.Globalization.CultureInfo.InvariantCulture);
-            }
+                Subject = viewModel.Subject,
+                Organiser = viewModel.Organizer,
+                Start = DateTime.ParseExact(viewModel.Start, "MM/dd/yyyy h:mm tt", CultureInfo.InvariantCulture)
+            };
+            if (viewModel.End != null)
+                e.End = e.Start =
+                    DateTime.ParseExact(viewModel.End, "MM/dd/yyyy h:mm tt", CultureInfo.InvariantCulture);
             else
-            {
                 e.End = e.Start;
-            }
-            e.Description = "<div>" + viewModel.Description + " <br>Organizer : " + viewModel.Organizer + "<br>OrganizerEmail : " + viewModel.OrganizerEmail+ "<br>Organizer Phone Number : "+ viewModel.PhoneNumber + "<br>Start time and date : " + e.Start + "<br></div > ";
+            e.Description = "<div>" + viewModel.Description + " <br>Organizer : " + viewModel.Organizer +
+                            "<br>OrganizerEmail : " + viewModel.OrganizerEmail + "<br>Organizer Phone Number : " +
+                            viewModel.PhoneNumber + "<br>Start time and date : " + e.Start + "<br></div > ";
             e.OrganiserEmail = viewModel.OrganizerEmail;
             e.PhoneNumber = viewModel.PhoneNumber;
             e.ThemeColor = "Green";
@@ -59,7 +59,7 @@ namespace SocialInitiatives3.Controllers
             e.Visible = false;
             dc.Add(e);
             dc.SaveChanges();
-            return Redirect(viewModel?.returnUrl ?? "/Calendar/Index");
+            return Redirect(viewModel.returnUrl ?? "/Calendar/Index");
         }
     }
 }
