@@ -20,9 +20,10 @@
                             <p class="card-text">
                                 Idea : @ViewBag.SYOIs[i].idea <br/>
                                 Resources: @ViewBag.SYOIs[i].resources <br/>
-                                Team: @ViewBag.SYOIs[i].team<br/>
+                                Team: @ViewBag.SYOIs[i].team <br/>
+                                Target Group : @ViewBag.SYOIs[i].targetGroup <br/>
                             </p>
-                            <a href="@Url.Action("SyoiDeleteButton", "Admin", new {init = ViewBag.SYOIs[i].SYOIId})" class="card-link">Delete</a>
+                            <a class="card-link" href="@Url.Action("SyoiDeleteButton", "Admin", new {init = ViewBag.SYOIs[i].SYOIId})">Delete</a>
                         </div>
                     </div>
                 }
