@@ -78,7 +78,7 @@ namespace SocialInitiatives3.Controllers
             var client = new SendGridClient(SendGridDetails.APIKEY);
             var msg = new SendGridMessage
             {
-                From = new EmailAddress("admin@tsrssocialinitiatives.com", "TSRS Social Initiatives"),
+                From = new EmailAddress("tsrssocialinitiatives@gmail.com", "TSRS Social Initiatives"),
                 Subject = "EmailConfirmation",
                 HtmlContent = $"Please confirm your account by <a href='{callbackUrl}'>clicking here</a>."
             };
